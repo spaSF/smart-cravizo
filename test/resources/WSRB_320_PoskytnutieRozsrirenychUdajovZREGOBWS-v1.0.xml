@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tns:ws20RozsireneUdajeFOByIFO xmlns:tns="http://endpoint.crfosp.sfs.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="WSRB_320_PoskytnutieRozsrirenychUdajovZREGOBWS-v1.0.xsd ">
+  <wsrbVstupnyDokument>
+    <ifo>ifo</ifo>
+    <pozadovaneTypyInf>
+      <pozadovanyTypInf>
+        <SKUPINA_UDAJOV>ident_udaje</SKUPINA_UDAJOV>
+        <chcemHistInf>true</chcemHistInf>
+      </pozadovanyTypInf>
+    </pozadovaneTypyInf>
+  </wsrbVstupnyDokument>
+</tns:ws20RozsireneUdajeFOByIFO>

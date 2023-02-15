@@ -1,0 +1,914 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:ns1="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://endpoint.crfosp.sfs.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="CrfoWSCEndpointService" targetNamespace="http://endpoint.crfosp.sfs.com/">
+	<wsdl:types>
+		<xs:schema elementFormDefault="unqualified" targetNamespace="http://endpoint.crfosp.sfs.com/" version="1.0" xmlns:tns="http://endpoint.crfosp.sfs.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+			<xs:element name="ws5Cis" type="tns:ws5Cis"/>
+			<xs:element name="ws5CisResponse" type="tns:ws5CisResponse"/>
+			<xs:complexType name="ws5Cis">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="CISELNIKY_OD" type="xs:dateTime"/>
+					<xs:element minOccurs="0" name="CISELNIKY_DO" type="xs:dateTime"/>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="CISELNIKY_LIST" type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ws5CisResponse">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="CISELNIKY_ODPOVED" type="tns:WS5_ODPOVED"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="WS5_ODPOVED">
+				<xs:sequence>
+					<xs:element name="SYSTEM_SP" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Systém SP užívateľa, ktorý vyvolal dotaz
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="UZIV" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Užívateľ, ktorý vyvolal dotaz
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="STAV" type="tns:ResponseStatus">
+						<xs:annotation>
+							<xs:documentation>Stav odpovede</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="NAVRATOVY_KOD" type="xs:int">
+						<xs:annotation>
+							<xs:documentation>
+								1 OK
+								1001 Chybné vstupné parametre
+								1020 Nenájdená
+								žiadna FO
+								9999 Chyba pri spracovani requestu:
+								20001 Timeout
+								odpovede externého WS
+								20002 Chyba pri zaslani XML requestu na
+								ext.WS:
+								20003 Chyba pri dohladani FO
+								20011 Nedostupná služba
+								externého WS
+								20100 Ignorovaný záznam:
+								20666 Neatorizovaný prístup
+								...
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="NAVRATOVA_SPRAVA" type="xs:string"/>
+					<xs:element minOccurs="0" name="WS5_ODPOVED_DATA" type="tns:WS5_DATA"/>
+				</xs:sequence>
+				<xs:attribute name="TypRequestCis" type="tns:TypRequestCis" use="required"/>
+				<xs:attribute name="RequestDateTime" type="xs:dateTime" use="required"/>
+				<xs:attribute name="ResponseDateTime" type="xs:dateTime" use="required"/>
+				<xs:attribute name="DOTAZ_ID" type="xs:long" use="required">
+					<xs:annotation>
+						<xs:documentation>Identifikátor dotazu, ktorý sa vrátil v prvej
+								odpovedi.
+							</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:complexType>
+			<xs:complexType name="WS5_DATA">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="POHLAVIECIS_LIST">
+						<xs:annotation>
+							<xs:documentation>Číselník pohlaví osoby (v súlade s číselníkom ŠÚ SR č. 3003 Pohlavie).</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element maxOccurs="unbounded" minOccurs="0" name="POHLAVIECIS" type="tns:pohlavieCis"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element minOccurs="0" name="STATCIS_LIST">
+						<xs:annotation>
+							<xs:documentation>Číselník štátov v súlade s číselníkom ŠÚ SR č.0086 Krajiny OSN</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element maxOccurs="unbounded" minOccurs="0" name="STATCIS" type="tns:statCis"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element minOccurs="0" name="NARODNOSTCIS_LIST">
+						<xs:annotation>
+							<xs:documentation>Číselník národností</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element maxOccurs="unbounded" minOccurs="0" name="NARODNOSTCIS" type="tns:narodnostCis"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element minOccurs="0" name="RODINNYSTAVCIS_LIST">
+						<xs:annotation>
+							<xs:documentation>Číselník rodinných stavov (vyplneny v súôade s číselnikom ŠÚ SR č. 4002 Rodinný stav: názov pre xml: MaritalStatus). Číselník bude napĺňaný z IS REGOB.</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element maxOccurs="unbounded" minOccurs="0" name="RODINNYSTAVCIS" type="tns:rodinnyStavCis"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element minOccurs="0" name="STUPENZVERENEJCIS_LIST">
+						<xs:annotation>
+							<xs:documentation>Číselník stupňov zverejnenia údajov o osobe - evidenčne chránené osoby</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element maxOccurs="unbounded" minOccurs="0" name="STUPENZVERENEJCIS" type="tns:stupenZverejCis"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element minOccurs="0" name="TYPOSOBYCIS_LIST">
+						<xs:annotation>
+							<xs:documentation>Číselník typov osôb</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element maxOccurs="unbounded" minOccurs="0" name="TYPOSOBYCIS" type="tns:typOsobyCis"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element minOccurs="0" name="TITULCIS_LIST">
+						<xs:annotation>
+							<xs:documentation>Číselník titulov - napĺňaný z IS REGOB</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element maxOccurs="unbounded" minOccurs="0" name="TITULCIS" type="tns:titulCis"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element minOccurs="0" name="TYPTITULCIS_LIST">
+						<xs:annotation>
+							<xs:documentation>Číselník typov titulov</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element maxOccurs="unbounded" minOccurs="0" name="TYPTITULCIS" type="tns:typTitulCis"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element minOccurs="0" name="TYPOBMSPOSCIS_LIST">
+						<xs:annotation>
+							<xs:documentation>Číselník typov pozbavenia/obmedzenia spôsobilosti na právne úkony</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element maxOccurs="unbounded" minOccurs="0" name="TYPOBMSPOSCIS" type="tns:typObmSposCis"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element minOccurs="0" name="TYPPOBYTUCIS_LIST">
+						<xs:annotation>
+							<xs:documentation>Číselník typov pobytu</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element maxOccurs="unbounded" minOccurs="0" name="TYPPOBYTUCIS" type="tns:typPobytuCis"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element minOccurs="0" name="DRUHDOKLADUCIS_LIST">
+						<xs:annotation>
+							<xs:documentation>Číselník druhov dokladu.</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element maxOccurs="unbounded" minOccurs="0" name="DRUHDOKLADUCIS" type="tns:druhDokladuCis"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element minOccurs="0" name="TYPVZTAHCIS_LIST">
+						<xs:annotation>
+							<xs:documentation>Číselník druhov rodinného vzťahu</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element maxOccurs="unbounded" minOccurs="0" name="TYPVZTAHCIS" type="tns:typVztahCis"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element minOccurs="0" name="TYPROLEVZTCIS_LIST">
+						<xs:annotation>
+							<xs:documentation>Číselník príbuzenských stavov v súlade s číselníkom ŠÚ SR č.4004 Príbuzenský stav</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element maxOccurs="unbounded" minOccurs="0" name="TYPROLEVZTCIS" type="tns:typRoleVztCis"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element minOccurs="0" name="REGISTERDOMOV_LIST">
+						<xs:annotation>
+							<xs:documentation>Register domov - môže obsahovať viac vchodov</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element maxOccurs="unbounded" minOccurs="0" name="REGISTERDOMOV" type="tns:regDomCis"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element minOccurs="0" name="REGISTERULIC_LIST">
+						<xs:annotation>
+							<xs:documentation>Register ulíc</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element maxOccurs="unbounded" minOccurs="0" name="REGISTERULIC" type="tns:regUlicaCis"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element minOccurs="0" name="REGISTERVCHOD_LIST">
+						<xs:annotation>
+							<xs:documentation>Register vchodov domu</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element maxOccurs="unbounded" minOccurs="0" name="REGISTERVCHOD" type="tns:regVchodDomuCis"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element minOccurs="0" name="UZEMNYCELOK_LIST">
+						<xs:annotation>
+							<xs:documentation>Register územných celkov</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element maxOccurs="unbounded" minOccurs="0" name="UZEMNYCELOK" type="tns:uzemnyCelokCis"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element minOccurs="0" name="STAVDOMUCIS_LIST">
+						<xs:annotation>
+							<xs:documentation>Číselník stavu domu</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element maxOccurs="unbounded" minOccurs="0" name="STAVDOMUCIS" type="tns:stavDomuCis"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element minOccurs="0" name="STAVDOMVCHODCIS_LIST">
+						<xs:annotation>
+							<xs:documentation>Číselník stavu vchodu domu</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element maxOccurs="unbounded" minOccurs="0" name="STAVDOMVCHODCIS" type="tns:stavDomVchodCis"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element minOccurs="0" name="TYPUZCELOKCIS_LIST">
+						<xs:annotation>
+							<xs:documentation>Typ územného celku</xs:documentation>
+						</xs:annotation>					
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element maxOccurs="unbounded" minOccurs="0" name="TYPUZCELOKCIS" type="tns:typUzCelokCis"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					
+					<xs:element minOccurs="0" name="AVIZVYBAVCIS_LIST">
+						<xs:annotation>
+							<xs:documentation>Typ územného celku</xs:documentation>
+						</xs:annotation>					
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element maxOccurs="unbounded" minOccurs="0" name="AVIZVYBAVCIS" type="tns:avizVybavCis"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+										
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="pohlavieCis">
+				<xs:annotation>
+					<xs:documentation>Pohlavíie osoby (v súlade s číselníkom ŠÚ SR č. 3003 Pohlavie).</xs:documentation>
+				</xs:annotation>
+				<xs:sequence>
+					<xs:element minOccurs="0" name="NAZOV" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Názov - popis záznamu</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+				<xs:attribute name="ID" type="xs:long" use="required">
+					<xs:annotation>
+						<xs:documentation>Jedinečný identifikátor objektu</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:complexType>
+			<xs:complexType name="statCis">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="NAZOV" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Názov - popis záznamu</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="KOD" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Kód štátu</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="KOD3" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Trojmiestny kód štátu</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+				<xs:attribute name="ID" type="xs:long" use="required">
+					<xs:annotation>
+						<xs:documentation>Jedinečný identifikátor objektu</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:complexType>
+			<xs:complexType name="narodnostCis">
+				<xs:annotation>
+					<xs:documentation>Národnostť</xs:documentation>
+				</xs:annotation>
+				<xs:sequence>
+					<xs:element minOccurs="0" name="NAZOV" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Názov - popis záznamu</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+				<xs:attribute name="ID" type="xs:long" use="required">
+					<xs:annotation>
+						<xs:documentation>Jedinečný identifikátor objektu</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:complexType>
+			<xs:complexType name="rodinnyStavCis">
+				<xs:annotation>
+					<xs:documentation>Rodinný stav (vyplneny v súôade s číselnikom ŠÚ SR č. 4002 Rodinný stav: názov pre xml: MaritalStatus). Číselník bude napĺňaný z IS REGOB.</xs:documentation>
+				</xs:annotation>
+				<xs:sequence>
+					<xs:element minOccurs="0" name="NAZOV" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Názov - popis záznamu</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+				<xs:attribute name="ID" type="xs:long" use="required">
+					<xs:annotation>
+						<xs:documentation>Jedinečný identifikátor objektu</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:complexType>
+			<xs:complexType name="stupenZverejCis">
+				<xs:annotation>
+					<xs:documentation>Stupeň zverejnenia údajov o osobe - evidenčne chránené osoby</xs:documentation>
+				</xs:annotation>
+				<xs:sequence>
+					<xs:element minOccurs="0" name="NAZOV" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Názov - popis záznamu</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+				<xs:attribute name="ID" type="xs:long" use="required">
+					<xs:annotation>
+						<xs:documentation>Jedinečný identifikátor objektu</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:complexType>
+			<xs:complexType name="typOsobyCis">
+				<xs:annotation>
+					<xs:documentation>Typo osôby</xs:documentation>
+				</xs:annotation>
+				<xs:sequence>
+					<xs:element minOccurs="0" name="NAZOV" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Názov - popis záznamu</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+				<xs:attribute name="ID" type="xs:long" use="required">
+					<xs:annotation>
+						<xs:documentation>Jedinečný identifikátor objektu</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:complexType>
+			<xs:complexType name="titulCis">
+				<xs:annotation>
+					<xs:documentation>Titul - napĺňaný z IS REGOB</xs:documentation>
+				</xs:annotation>
+				<xs:sequence>
+					<xs:element minOccurs="0" name="NAZOV" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Názov - popis záznamu</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="TYP" type="tns:typTitulCis">
+						<xs:annotation>
+							<xs:documentation>Hodnota číselníka typu titulu</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+				<xs:attribute name="ID" type="xs:long" use="required">
+					<xs:annotation>
+						<xs:documentation>Jedinečný identifikátor objektu</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:complexType>
+			<xs:complexType name="typTitulCis">
+				<xs:annotation>
+					<xs:documentation>Typ titulu</xs:documentation>
+				</xs:annotation>
+				<xs:sequence>
+					<xs:element minOccurs="0" name="NAZOV" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Názov - popis záznamu</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+				<xs:attribute name="ID" type="xs:long" use="required">
+					<xs:annotation>
+						<xs:documentation>Jedinečný identifikátor objektu</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:complexType>
+			<xs:complexType name="typObmSposCis">
+				<xs:annotation>
+					<xs:documentation>Pozbavenie/obmedzenie spôsobilosti na právne úkony</xs:documentation>
+				</xs:annotation>
+				<xs:sequence>
+					<xs:element minOccurs="0" name="NAZOV" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Názov - popis záznamu</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+				<xs:attribute name="ID" type="xs:long" use="required">
+					<xs:annotation>
+						<xs:documentation>Jedinečný identifikátor objektu</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:complexType>
+			<xs:complexType name="typPobytuCis">
+				<xs:annotation>
+					<xs:documentation>Typ pobytu</xs:documentation>
+				</xs:annotation>
+				<xs:sequence>
+					<xs:element minOccurs="0" name="NAZOV" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Názov - popis záznamu</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+				<xs:attribute name="ID" type="xs:long" use="required">
+					<xs:annotation>
+						<xs:documentation>Jedinečný identifikátor objektu</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:complexType>
+			<xs:complexType name="druhDokladuCis">
+				<xs:annotation>
+					<xs:documentation>Druh dokladu.</xs:documentation>
+				</xs:annotation>
+				<xs:sequence>
+					<xs:element minOccurs="0" name="NAZOV" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Názov - popis záznamu</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+				<xs:attribute name="ID" type="xs:long" use="required">
+					<xs:annotation>
+						<xs:documentation>Jedinečný identifikátor objektu</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:complexType>
+			<xs:complexType name="typVztahCis">
+				<xs:annotation>
+					<xs:documentation>Druh rodinného vzťahu</xs:documentation>
+				</xs:annotation>
+				<xs:sequence>
+					<xs:element minOccurs="0" name="NAZOV" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Názov - popis záznamu</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+				<xs:attribute name="ID" type="xs:long" use="required">
+					<xs:annotation>
+						<xs:documentation>Jedinečný identifikátor objektu</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:complexType>
+			<xs:complexType name="typRoleVztCis">
+				<xs:annotation>
+					<xs:documentation>Príbuzenský stav v súlade s číselníkom ŠÚ SR č.4004 Príbuzenský stav</xs:documentation>
+				</xs:annotation>
+				<xs:sequence>
+					<xs:element minOccurs="0" name="NAZOV" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Názov - popis záznamu</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="TYPVZT" type="tns:typVztahCis"/>
+				</xs:sequence>
+				<xs:attribute name="ID" type="xs:long" use="required">
+					<xs:annotation>
+						<xs:documentation>Jedinečný identifikátor objektu</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:complexType>
+			<xs:complexType name="regDomCis">
+				<xs:annotation>
+					<xs:documentation>Register domov</xs:documentation>
+				</xs:annotation>
+				<xs:sequence>
+					<xs:element minOccurs="0" name="NAZOV" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Názov - popis záznamu</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="SUPISC" type="xs:long">
+						<xs:annotation>
+							<xs:documentation>Súpisné číslo. Jednoznačne identifikuje budovu v obci, resp. v časti obce.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="KATC" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Katastrálne číslo domu je textové pole vyhradené pre záznamy z katastrálneho úradu.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="STAVDOM" type="tns:stavDomuCis">
+						<xs:annotation>
+							<xs:documentation>Stav domu.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="OBEC" type="tns:uzemnyCelokCis">
+						<xs:annotation>
+							<xs:documentation>Kód ôzemného celku - obec</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="CASTOBCE" type="tns:uzemnyCelokCis">
+						<xs:annotation>
+							<xs:documentation>Kód ôzemného celku - časť obce</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+				<xs:attribute name="ID" type="xs:long" use="required">
+					<xs:annotation>
+						<xs:documentation>Jedinečný identifikátor objektu</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:complexType>
+			<xs:complexType name="stavDomuCis">
+				<xs:annotation>
+					<xs:documentation>Stav domu.</xs:documentation>
+				</xs:annotation>
+				<xs:sequence>
+					<xs:element minOccurs="0" name="NAZOV" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Názov/hodnota položky.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+				<xs:attribute name="ID" type="xs:long" use="required">
+					<xs:annotation>
+						<xs:documentation>Jedinečný identifikátor objektu</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:complexType>
+			<xs:complexType name="uzemnyCelokCis">
+				<xs:annotation>
+					<xs:documentation>Územné celky </xs:documentation>
+				</xs:annotation>
+				<xs:sequence>
+					<xs:element minOccurs="0" name="NAZOV" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Názov/hodnota položky.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="TYPUC" type="tns:typUzCelokCis">
+						<xs:annotation>
+							<xs:documentation>Typ ôzemného celku.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="NADRADENYUC" type="tns:uzemnyCelokCis">
+						<xs:annotation>
+							<xs:documentation>Nadradený územný celok.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+				<xs:attribute name="ID" type="xs:long" use="required">
+					<xs:annotation>
+						<xs:documentation>Jedinečný identifikátor objektu</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:complexType>
+			<xs:complexType name="regUlicaCis">
+				<xs:annotation>
+					<xs:documentation>Register ulíc</xs:documentation>
+				</xs:annotation>
+				<xs:sequence>
+					<xs:element minOccurs="0" name="NAZOV" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Názov/hodnota položky.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+				<xs:attribute name="ID" type="xs:long" use="required">
+					<xs:annotation>
+						<xs:documentation>Jedinečný identifikátor objektu</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:complexType>
+			<xs:complexType name="regVchodDomuCis">
+				<xs:annotation>
+					<xs:documentation>Register vchodov domu</xs:documentation>
+				</xs:annotation>
+				<xs:sequence>
+					<xs:element minOccurs="0" name="NAZOV" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Názov/hodnota položky.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="KOD" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Kód položky.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="ORIENTC" type="xs:long">
+						<xs:annotation>
+							<xs:documentation>Orientačné číslo.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="ORIENTCZN" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Znak orientačného čísla.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="PSC" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>PSČ</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="ULICA" type="tns:regUlicaCis">
+						<xs:annotation>
+							<xs:documentation>Identifikátor ulice z číselníka ulíc.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="DOM" type="tns:regDomCis">
+						<xs:annotation>
+							<xs:documentation>Identifikátor domu z číselníka domov.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="STAVVCHOD" type="tns:stavDomVchodCis">
+						<xs:annotation>
+							<xs:documentation>Stav vchodu z číselníka stavu vchodu.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+				<xs:attribute name="ID" type="xs:long" use="required">
+					<xs:annotation>
+						<xs:documentation>Jedinečný identifikátor objektu</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:complexType>
+			<xs:complexType name="stavDomVchodCis">
+				<xs:annotation>
+					<xs:documentation>Stav vchodu domu.</xs:documentation>
+				</xs:annotation>
+				<xs:sequence>
+					<xs:element minOccurs="0" name="NAZOV" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Názov/hodnota položky.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+				<xs:attribute name="ID" type="xs:long" use="required">
+					<xs:annotation>
+						<xs:documentation>Jedinečný identifikátor objektu</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:complexType>
+			<xs:complexType name="typUzCelokCis">
+				<xs:annotation>
+					<xs:documentation>Typ územného celku.</xs:documentation>
+				</xs:annotation>
+				<xs:sequence>
+					<xs:element minOccurs="0" name="NAZOV" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Názov/hodnota položky.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="UROVEN" type="xs:long">
+						<xs:annotation>
+							<xs:documentation>Úroveň územného celku.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+				<xs:attribute name="ID" type="xs:long" use="required">
+					<xs:annotation>
+						<xs:documentation>Jedinečný identifikátor objektu</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:complexType>			
+			<xs:complexType name="avizVybavCis">
+				<xs:annotation>
+					<xs:documentation>Číselník avizovaných položiek pre vybavenie avíz</xs:documentation>
+				</xs:annotation>
+				<xs:sequence>
+					<xs:element minOccurs="0" name="NAZOV" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Názov/hodnota položky.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+				<xs:attribute name="ID" type="xs:long" use="required">
+					<xs:annotation>
+						<xs:documentation>Jedinečný identifikátor objektu</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:complexType>						
+			<xs:simpleType name="TypRequestCis">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="pohlavieCis">
+						<xs:annotation>
+							<xs:documentation>Číselník pohlaví osoby (v súlade s číselníkom ŠÚ SR č. 3003 Pohlavie).</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="statCis">
+						<xs:annotation>
+							<xs:documentation>Číselník štátov v súlade s číselníkom ŠÚ SR č.0086 Krajiny OSN</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="narodnostCis">
+						<xs:annotation>
+							<xs:documentation>Číselník národností</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="rodinnyStavCis">
+						<xs:annotation>
+							<xs:documentation>Číselník rodinných stavov (vyplneny v súôade s číselnikom ŠÚ SR č. 4002 Rodinný stav: názov pre xml: MaritalStatus). Číselník bude napĺňaný z IS REGOB.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="stupenZverejCis">
+						<xs:annotation>
+							<xs:documentation>Číselník stupňov zverejnenia údajov o osobe - evidenčne chránené osoby</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="typOsobyCis">
+						<xs:annotation>
+							<xs:documentation>Číselník typov osôb</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="titulCis">
+						<xs:annotation>
+							<xs:documentation>Číselník titulov - napĺňaný z IS REGOB</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="typTitulCis">
+						<xs:annotation>
+							<xs:documentation>Číselník typov titulov</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="typObmSposCis">
+						<xs:annotation>
+							<xs:documentation>Číselník typov pozbavenia/obmedzenia spôsobilosti na právne úkony</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="typPobytuCis">
+						<xs:annotation>
+							<xs:documentation>Číselník typov pobytu</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="druhDokladuCis">
+						<xs:annotation>
+							<xs:documentation>Číselník druhov dokladu.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="typVztahCis">
+						<xs:annotation>
+							<xs:documentation>Číselník druhov rodinného vzťahu</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="typRoleVztCis">
+						<xs:annotation>
+							<xs:documentation>Číselník príbuzenských stavov v súlade s číselníkom ŠÚ SR č.4004 Príbuzenský stav</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="regUlicaCis">
+						<xs:annotation>
+							<xs:documentation>Číselník ulíc</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="regVchodDomuCis">
+						<xs:annotation>
+							<xs:documentation>Číselník vchodov domu</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="uzemnyCelokCis">
+						<xs:annotation>
+							<xs:documentation>Číselník územných celkov</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="stavDomuCis">
+						<xs:annotation>
+							<xs:documentation>Číselník stavu domu</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="stavDomVchodCis">
+						<xs:annotation>
+							<xs:documentation>Číselník stavu vchodu domu</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="typUzCelokCis">
+						<xs:annotation>
+							<xs:documentation>Číselník typu územného celku</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="avizVybavCis">
+						<xs:annotation>
+							<xs:documentation>Číselník avizovaných položiek pre vybavenie avíz</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>					
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="ResponseStatus">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="OPEN">
+						<xs:annotation>
+							<xs:documentation>dotaz bol prijaty do CRFO a caka na odoslanie
+								do RFO MV - tyka sa hlavne offline sluzieb</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="SENDEXT">
+						<xs:annotation>
+							<xs:documentation>dotaz bol odoslany do RFO MV - tyka sa hlavne
+								offline sluzieb</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="RESPONDED">
+						<xs:annotation>
+							<xs:documentation>k dotazu uz prisiel response z RFO MV - tyka sa
+								hlavne offline sluzieb</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="EXTIDLE">
+						<xs:annotation>
+							<xs:documentation>dotaz bol odoslany do RFO MV, ale v stanovenom
+								case neprisla odpoved, system sa bude kontrolovat prijatie
+								odpovede opakovane</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="CLOSED">
+						<xs:annotation>
+							<xs:documentation>dotaz bol vykonany a ukonceny
+							</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="ERROR">
+						<xs:annotation>
+							<xs:documentation>dotaz bol vykonany a ukonceny s chybou
+							</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="ws5CisResponse">
+		<wsdl:part name="parameters" element="tns:ws5CisResponse">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ws5Cis">
+		<wsdl:part name="parameters" element="tns:ws5Cis">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:portType name="CrfoWSCEndpoint">
+		<wsdl:operation name="ws5Cis">
+			<wsdl:input name="ws5Cis" message="tns:ws5Cis">
+    </wsdl:input>
+			<wsdl:output name="ws5CisResponse" message="tns:ws5CisResponse">
+    </wsdl:output>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="CrfoWSCEndpointServiceSoapBinding" type="tns:CrfoWSCEndpoint">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="ws5Cis">
+			<soap:operation soapAction="tns:ws5Cis" style="document"/>
+			<wsdl:input name="ws5Cis">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="ws5CisResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="CrfoWSCEndpointService">
+		<wsdl:port name="CrfoWSCEndpointPort" binding="tns:CrfoWSCEndpointServiceSoapBinding">
+			<soap:address location="http://localhost:8080/smart-crfo/services/crfoWSC"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

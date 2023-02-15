@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wls:weblogic-web-app
+	xmlns:wls="http://xmlns.oracle.com/weblogic/weblogic-web-app"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd http://xmlns.oracle.com/weblogic/weblogic-web-app http://xmlns.oracle.com/weblogic/weblogic-web-app/1.8/weblogic-web-app.xsd">
+	<wls:weblogic-version>12.2.1.3</wls:weblogic-version>
+	<wls:context-root>smart-craviza-dev</wls:context-root>
+	<wls:container-descriptor>
+		<wls:prefer-web-inf-classes>false</wls:prefer-web-inf-classes>
+		<wls:prefer-application-packages>
+			<wls:package-name>antlr.*</wls:package-name>
+			<wls:package-name>antlr.collections.*</wls:package-name>
+			<wls:package-name>antlr.collections.impl.*</wls:package-name>
+			<wls:package-name>antlr.debug.misc.*</wls:package-name>
+			<wls:package-name>com.ctc.wstx.*</wls:package-name>
+			<wls:package-name>com.sun.codemodel.*</wls:package-name>
+			<wls:package-name>com.sun.istack.*</wls:package-name>
+<!-- 			<wls:package-name>com.sun.org.*</wls:package-name> -->
+			<wls:package-name>com.sun.tools.*</wls:package-name>
+<!-- 			<wls:package-name>com.sun.xml.*</wls:package-name> -->
+			<wls:package-name>javax.mail.*</wls:package-name>
+			<wls:package-name>javax.mail.event.*</wls:package-name>
+			<wls:package-name>javax.mail.internet.*</wls:package-name>
+			<wls:package-name>javax.mail.search.*</wls:package-name>
+			<wls:package-name>javax.mail.util.*</wls:package-name>
+			<wls:package-name>javax.persistence.*</wls:package-name>
+			<wls:package-name>javax.persistence.criteria.*</wls:package-name>
+			<wls:package-name>javax.persistence.metamodel.*</wls:package-name>
+			<wls:package-name>javax.persistence.spi.*</wls:package-name>
+			<wls:package-name>javax.transaction.*</wls:package-name>
+			<wls:package-name>javax.transaction.xa.*</wls:package-name>
+			<wls:package-name>org.apache.cxf.*</wls:package-name>
+			<wls:package-name>org.apache.commons.*</wls:package-name>
+			<wls:package-name>org.apache.oro.*</wls:package-name>
+			<wls:package-name>org.codehaus.stax2.*</wls:package-name>
+			<wls:package-name>org.kohsuke.rngom.*</wls:package-name>
+			<wls:package-name>org.relaxng.datatype.*</wls:package-name>
+			<!--IBA AK JE V LIB ORACLE DRIVER -->
+<!-- 			<wls:package-name>oracle.core.lmx.*</wls:package-name> -->
+<!-- 			<wls:package-name>oracle.core.lvf.*</wls:package-name> -->
+<!-- 			<wls:package-name>oracle.jdbc.*</wls:package-name> -->
+<!-- 			<wls:package-name>oracle.jdbc.aq.*</wls:package-name> -->
+<!-- 			<wls:package-name>oracle.jdbc.connector.*</wls:package-name> -->
+<!-- 			<wls:package-name>oracle.jdbc.dcn.*</wls:package-name> -->
+<!-- 			<wls:package-name>oracle.jdbc.diagnostics.*</wls:package-name> -->
+<!-- 			<wls:package-name>oracle.jdbc.driver.*</wls:package-name> -->
+<!-- 			<wls:package-name>oracle.jdbc.internal.*</wls:package-name> -->
+<!-- 			<wls:package-name>oracle.jdbc.oci.*</wls:package-name> -->
+<!-- 			<wls:package-name>oracle.jdbc.oracore.*</wls:package-name> -->
+<!-- 			<wls:package-name>oracle.jdbc.pool.*</wls:package-name> -->
+<!-- 			<wls:package-name>oracle.jdbc.proxy.*</wls:package-name> -->
+<!-- 			<wls:package-name>oracle.jdbc.replay.*</wls:package-name> -->
+<!-- 			<wls:package-name>oracle.jdbc.rowset.*</wls:package-name> -->
+<!-- 			<wls:package-name>oracle.jdbc.util.*</wls:package-name> -->
+<!-- 			<wls:package-name>oracle.jdbc.xa.*</wls:package-name> -->
+<!-- 			<wls:package-name>oracle.jpub.runtime.*</wls:package-name> -->
+<!-- 			<wls:package-name>oracle.net.ano.*</wls:package-name> -->
+<!-- 			<wls:package-name>oracle.net.aso.*</wls:package-name> -->
+<!-- 			<wls:package-name>oracle.net.jdbc.*</wls:package-name> -->
+<!-- 			<wls:package-name>oracle.net.jndi.*</wls:package-name> -->
+<!-- 			<wls:package-name>oracle.net.ns.*</wls:package-name> -->
+<!-- 			<wls:package-name>oracle.net.nt.*</wls:package-name> -->
+<!-- 			<wls:package-name>oracle.net.resolver.*</wls:package-name> -->
+<!-- 			<wls:package-name>oracle.security.o3logon.*</wls:package-name> -->
+<!-- 			<wls:package-name>oracle.security.o5logon.*</wls:package-name> -->
+<!-- 			<wls:package-name>oracle.sql.*</wls:package-name> -->
+<!-- 			<wls:package-name>oracle.sql.converter.*</wls:package-name> -->
+
+			<!-- <wls:package-name>javax.xml.soap.*</wls:package-name> -->
+			<!-- <wls:package-name>org.apache.commons.lang.*</wls:package-name> -->
+			<!-- <wls:package-name>com.sun.xml.*</wls:package-name> -->
+
+		</wls:prefer-application-packages>
+	  <wls:show-archived-real-path-enabled>true</wls:show-archived-real-path-enabled>
+	</wls:container-descriptor>
+	<wls:session-descriptor>
+		<wls:cookie-name>CRAVIZODEVSESSIONID</wls:cookie-name>
+	</wls:session-descriptor>
+</wls:weblogic-web-app>

@@ -1,0 +1,101 @@
+SET DEFINE OFF;
+MERGE INTO SC_CONFIG A USING
+ (SELECT
+  12230 as ID,
+  0 as VERSION,
+  'adminLdap' as CREATED_BY,
+  TO_TIMESTAMP('30/11/2018 13:12:15,531000','fmDDfm/fmMMfm/YYYY fmHH24fm:MI:SS,FF') as DATE_CREATED,
+  'Application Header' as DESCRIPTION,
+  'cravizo.header.contents' as PROP_KEY,
+  TO_TIMESTAMP('30/11/2018 13:12:15,531000','fmDDfm/fmMMfm/YYYY fmHH24fm:MI:SS,FF') as LAST_UPDATED,
+  'adminLdap' as UPDATED_BY,
+  '<table border=''0'' cellspacing=''0''><tr><td background=''./images/logo_r1_c1.png'' height=''36''><table width=''176'' border=''0'' cellspacing=''0''><tr><td>&nbsp;</td></tr></table></td><td background=''./images/logo_r1_c2.png'' width=''100%''><font style=''font-family:Arial; font-size:16px; color: #00264D; text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white; filter: progid:DXImageTransform.Microsoft.Glow(Color=#ffffff,Strength=1);''><b>Centr�lny register fyzick�ch os�b Soci�lnej pois�ovne SR - Av�za o nezrovnalostiach</b></font></td><td background=''./images/logo_r1_c3.png'' height=''36''><table width=''165'' border=''0'' cellspacing=''0''><tr><td>&nbsp;</td></tr></table></td></tr></table>' as VALUE,
+  1 as ADMIN_PROPERTY
+  FROM DUAL) B
+ON (A.ID = B.ID)
+WHEN NOT MATCHED THEN 
+INSERT (
+  ID, VERSION, CREATED_BY, DATE_CREATED, DESCRIPTION, 
+  PROP_KEY, LAST_UPDATED, UPDATED_BY, VALUE, ADMIN_PROPERTY)
+VALUES (
+  B.ID, B.VERSION, B.CREATED_BY, B.DATE_CREATED, B.DESCRIPTION, 
+  B.PROP_KEY, B.LAST_UPDATED, B.UPDATED_BY, B.VALUE, B.ADMIN_PROPERTY)
+WHEN MATCHED THEN
+UPDATE SET 
+  A.VERSION = B.VERSION,
+  A.CREATED_BY = B.CREATED_BY,
+  A.DATE_CREATED = B.DATE_CREATED,
+  A.DESCRIPTION = B.DESCRIPTION,
+  A.PROP_KEY = B.PROP_KEY,
+  A.LAST_UPDATED = B.LAST_UPDATED,
+  A.UPDATED_BY = B.UPDATED_BY,
+  A.VALUE = B.VALUE,
+  A.ADMIN_PROPERTY = B.ADMIN_PROPERTY;
+
+MERGE INTO SC_CONFIG A USING
+ (SELECT
+  14330 as ID,
+  0 as VERSION,
+  'admin' as CREATED_BY,
+  TO_TIMESTAMP('3/12/2018 12:26:11,000000','fmDDfm/fmMMfm/YYYY fmHH24fm:MI:SS,FF') as DATE_CREATED,
+  'User for batch processing Aviza' as DESCRIPTION,
+  'crfosp.ws.batch.ldapuser' as PROP_KEY,
+  TO_TIMESTAMP('3/12/2018 12:26:11,000000','fmDDfm/fmMMfm/YYYY fmHH24fm:MI:SS,FF') as LAST_UPDATED,
+  'admin' as UPDATED_BY,
+  'avadm' as VALUE,
+  1 as ADMIN_PROPERTY
+  FROM DUAL) B
+ON (A.ID = B.ID)
+WHEN NOT MATCHED THEN 
+INSERT (
+  ID, VERSION, CREATED_BY, DATE_CREATED, DESCRIPTION, 
+  PROP_KEY, LAST_UPDATED, UPDATED_BY, VALUE, ADMIN_PROPERTY)
+VALUES (
+  B.ID, B.VERSION, B.CREATED_BY, B.DATE_CREATED, B.DESCRIPTION, 
+  B.PROP_KEY, B.LAST_UPDATED, B.UPDATED_BY, B.VALUE, B.ADMIN_PROPERTY)
+WHEN MATCHED THEN
+UPDATE SET 
+  A.VERSION = B.VERSION,
+  A.CREATED_BY = B.CREATED_BY,
+  A.DATE_CREATED = B.DATE_CREATED,
+  A.DESCRIPTION = B.DESCRIPTION,
+  A.PROP_KEY = B.PROP_KEY,
+  A.LAST_UPDATED = B.LAST_UPDATED,
+  A.UPDATED_BY = B.UPDATED_BY,
+  A.VALUE = B.VALUE,
+  A.ADMIN_PROPERTY = B.ADMIN_PROPERTY;
+
+MERGE INTO SC_CONFIG A USING
+ (SELECT
+  20230 as ID,
+  4 as VERSION,
+  'adminaviz' as CREATED_BY,
+  TO_TIMESTAMP('17/12/2018 10:28:24,581000','fmDDfm/fmMMfm/YYYY fmHH24fm:MI:SS,FF') as DATE_CREATED,
+  'fieldPosition poslednej bref entifiy avizoOsoba do SectionStack, dalsie do tabSet' as DESCRIPTION,
+  'crfosp.avizo.tbref' as PROP_KEY,
+  TO_TIMESTAMP('7/1/2019 16:13:33,875000','fmDDfm/fmMMfm/YYYY fmHH24fm:MI:SS,FF') as LAST_UPDATED,
+  'adminaviz' as UPDATED_BY,
+  '103' as VALUE,
+  1 as ADMIN_PROPERTY
+  FROM DUAL) B
+ON (A.ID = B.ID)
+WHEN NOT MATCHED THEN 
+INSERT (
+  ID, VERSION, CREATED_BY, DATE_CREATED, DESCRIPTION, 
+  PROP_KEY, LAST_UPDATED, UPDATED_BY, VALUE, ADMIN_PROPERTY)
+VALUES (
+  B.ID, B.VERSION, B.CREATED_BY, B.DATE_CREATED, B.DESCRIPTION, 
+  B.PROP_KEY, B.LAST_UPDATED, B.UPDATED_BY, B.VALUE, B.ADMIN_PROPERTY)
+WHEN MATCHED THEN
+UPDATE SET 
+  A.VERSION = B.VERSION,
+  A.CREATED_BY = B.CREATED_BY,
+  A.DATE_CREATED = B.DATE_CREATED,
+  A.DESCRIPTION = B.DESCRIPTION,
+  A.PROP_KEY = B.PROP_KEY,
+  A.LAST_UPDATED = B.LAST_UPDATED,
+  A.UPDATED_BY = B.UPDATED_BY,
+  A.VALUE = B.VALUE,
+  A.ADMIN_PROPERTY = B.ADMIN_PROPERTY;
+
+COMMIT;

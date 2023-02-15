@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<this:TransEnvIn corrID="" xmlns:this="http://www.egov.sk/mvsr/RFO/datatypes/Podp/Ext/PoskytnutieRozsrirenychUdajovZREGOBWS-v1.0.xsd" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.egov.sk/mvsr/RFO/datatypes/Podp/Ext/PoskytnutieRozsrirenychUdajovZREGOBWS-v1.0.xsd PoskytnutieRozsrirenychUdajovZREGOBWS-v1.0.xsd ">
+  <this:POD>
+    <this:IF>this:IF</this:IF>
+    <this:OZ>true</this:OZ>
+    <this:UES>
+      <this:PO>this:PO</this:PO>
+      <this:TI>this:TI</this:TI>
+    </this:UES>
+    <this:SPIList>
+      <this:SPI>
+        <this:HO>0</this:HO>
+        <this:TUDHONA>this:TUDHONA</this:TUDHONA>
+        <this:HU>true</this:HU>
+      </this:SPI>
+    </this:SPIList>
+  </this:POD>
+</this:TransEnvIn>

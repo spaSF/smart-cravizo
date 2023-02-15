@@ -1,0 +1,19 @@
+# Default ignored files
+/smart-crfo.iws
+
+# Project exclude paths
+/target/classes/
+/target/work/plugin-build-classes/
+/target/work/plugin-classes/
+/target/work/resources/
+/target/work/scriptCache/
+/target/work/stubs/
+/target/work/tomcat/
+/target/
+/web-app/isomorphic/
+/.idea/misc.xml
+/.slcache/
+/tmp/
+
+# Project exclude paths
+/out/

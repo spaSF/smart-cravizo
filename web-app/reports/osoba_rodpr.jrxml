@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.1.1.final using JasperReports Library version 6.1.1  -->
+<!-- 2015-11-26T16:21:07 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="osoba_rodpr" language="groovy" pageWidth="180" pageHeight="842" columnWidth="180" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" isFloatColumnFooter="true" uuid="392d69fd-58db-4822-aea8-88c0b0a47e6e">
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="priezvisko" class="java.lang.String"/>
+	<field name="priezvisko_idx" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="16" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="130" height="16" uuid="dbeb4479-2667-445c-b362-b7df19862bb7"/>
+				<box leftPadding="2">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font isBold="true" pdfEncoding="Cp1250"/>
+				</textElement>
+				<text><![CDATA[Priezvisko]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="130" y="0" width="49" height="16" uuid="17c60040-7092-49fb-aeaf-1d2a5dac2438"/>
+				<box leftPadding="2">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font isBold="true" pdfEncoding="Cp1250"/>
+				</textElement>
+				<text><![CDATA[Poradie]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="130" height="16" uuid="5c4a650d-433f-4690-ace2-c506a19c0820"/>
+				<box leftPadding="2">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{priezvisko}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="130" y="0" width="49" height="16" uuid="0757b1a8-b8f4-45ea-b111-28872406a81e">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box leftPadding="2">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{priezvisko_idx}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

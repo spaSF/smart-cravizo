@@ -1,0 +1,1078 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://endpoint.crfosp.sfs.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="CrfoWSAEndpointService" targetNamespace="http://endpoint.crfosp.sfs.com/">
+	<wsdl:types>
+		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://endpoint.crfosp.sfs.com/" elementFormDefault="unqualified" targetNamespace="http://endpoint.crfosp.sfs.com/" version="1.0">
+			<xs:element name="wsa1ZaznamenanieAviza" type="tns:wsa1ZaznamenanieAviza"/>
+			<xs:element name="wsa1ZaznamenanieAvizaResponse" type="tns:wsa1ZaznamenanieAvizaResponse"/>
+			<xs:element name="wsa2VybavenieAviz" type="tns:wsa2VybavenieAviz"/>
+			<xs:element name="wsa2VybavenieAvizResponse" type="tns:wsa2VybavenieAvizResponse"/>
+			<xs:element name="wsa3NevybaveneAviza" type="tns:wsa3NevybaveneAviza"/>
+			<xs:element name="wsa3NevybaveneAvizaResponse" type="tns:wsa3NevybaveneAvizaResponse"/>
+			<xs:complexType name="wsa2VybavenieAviz">
+				<xs:sequence>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="AVIZO_LIST" type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="wsa2VybavenieAvizResponse">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="VYBAVENIE_AVIZ_ODPOVED" type="tns:WSA2_ODPOVED"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="WSA2_ODPOVED">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="WSA2_ODPOVED_DATA" type="tns:WSA2_DATA">
+						<xs:annotation>
+							<xs:documentation>Dáta v odpovedi</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+				<xs:attribute name="RequestDateTime" type="xs:dateTime" use="required">
+					<xs:annotation>
+						<xs:documentation>Dátum a čas prijatia requestu</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="ResponseDateTime" type="xs:dateTime" use="required">
+					<xs:annotation>
+						<xs:documentation>Dátum a čas odoslania response</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:complexType>
+			<xs:complexType name="WSA2_DATA">
+				<xs:sequence>
+					<xs:element name="SYSTEM_SP" type="tns:systemCis">
+						<xs:annotation>
+							<xs:documentation>Systém SP užívateľa, ktorý vyvolal dotaz</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="UZIV" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Užívateľ, ktorý vyvolal dotaz</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="STAV" type="tns:ResponseStatus">
+						<xs:annotation>
+							<xs:documentation>Stav odpovede</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="NAVRATOVY_KOD" type="xs:int">
+						<xs:annotation>
+							<xs:documentation>								1 OK
+								1001 Chybné vstupné parametre
+								1020 Nenájdená
+								žiadna FO
+								9999 Chyba pri spracovani requestu:
+								20001 Timeout
+								odpovede externého WS
+								20002 Chyba pri zaslani XML requestu na
+								ext.WS:
+								20003 Chyba pri dohladani FO
+								20011 Nedostupná služba
+								externého WS
+								20100 Ignorovaný záznam:
+								20666 Neatorizovaný prístup
+								...</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="NAVRATOVA_SPRAVA" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Návratová správa</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="VYBAVENIE_AVIZA_LIST">
+						<xs:annotation>
+							<xs:documentation>Záznam o vybavení avíz</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element maxOccurs="unbounded" minOccurs="0" name="AVIZO" type="tns:vybavenieAvizo"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+				<xs:attribute name="DOTAZ_ID" type="xs:long" use="required">
+					<xs:annotation>
+						<xs:documentation>Identifikáto dotazu</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:complexType>
+			<xs:complexType name="systemCis">
+				<xs:annotation>
+					<xs:documentation>Číselník systémov SP</xs:documentation>
+				</xs:annotation>
+				<xs:sequence>
+					<xs:element name="KOD" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Kód systému SP</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="NAZOV" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Názov systému SP</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="vybavenieAvizo">
+				<xs:sequence>
+					<xs:element name="ID" type="xs:long">
+						<xs:annotation>
+							<xs:documentation>Identifikátor avíza</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="IFO" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>IFO</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="VYTVORENE" type="xs:dateTime">
+						<xs:annotation>
+							<xs:documentation>Dátum a čas vytvorenia avíza</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="VYBAVENE" type="xs:dateTime">
+						<xs:annotation>
+							<xs:documentation>Dátum a čas vybavenia avíza (ak bolo vybavené)</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="STAV_AVIZA" type="xs:long">
+						<xs:annotation>
+							<xs:documentation>
+								Celkový stav avíza
+								- 0 EVIDOVANE,
+								- 2 ODOSLANE,
+								- 3 CAKAJUCE,
+								- 4 NEVYBAVENE,
+								- 5 VYBAVENE,
+								- 6 UZAVRETE,
+								- 7 CHYBNE						
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="POLOZKY_LIST">
+						<xs:annotation>
+							<xs:documentation>Avízované položky</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element maxOccurs="unbounded" minOccurs="0" name="POLOZKA" type="tns:vybavenieAtributy"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="vybavenieAtributy">
+				<xs:sequence>
+					<xs:element name="AVIZOVANA_POLOZKA" type="xs:long">
+						<xs:annotation>
+							<xs:documentation>Identifikátor avizovanej položky z číselníka  AvizVybavCis</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="POPIS_POLOZKY" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Popis položky</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="AVIZOVANA_HODNOTA_POLOZKY" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Avízovaná hodnote pre položku</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="STAV_VYBAVENIA_POLOZKY" type="xs:long">
+						<xs:annotation>
+							<xs:documentation>		
+						nepotvrdene(0), // Nepotvrdena hodnota
+						potvrdene(1), // Potvrdená hodnota
+						opravene (2) //	Opravená hodnota
+					</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="STAV_POPIS" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Popis stavu</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="wsa3NevybaveneAviza">
+				<xs:annotation>
+					<xs:documentation>Nevibavené avíza pre jedno IFO</xs:documentation>
+				</xs:annotation>
+				<xs:sequence>
+					<xs:element minOccurs="0" name="IFO" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>IFO</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="wsa3NevybaveneAvizaResponse">
+				<xs:annotation>
+					<xs:documentation>Nevybavené avíza pre jedno IFO</xs:documentation>
+				</xs:annotation>
+				<xs:sequence>
+					<xs:element minOccurs="0" name="NEVYBAVENE_AVIZA_ODPOVED" type="tns:WSA3_ODPOVED"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="WSA3_ODPOVED">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="WSA3_ODPOVED_DATA" type="tns:WSA3_DATA"/>
+				</xs:sequence>
+				<xs:attribute name="RequestDateTime" type="xs:dateTime" use="required"/>
+				<xs:attribute name="ResponseDateTime" type="xs:dateTime" use="required"/>
+			</xs:complexType>
+			<xs:complexType name="WSA3_DATA">
+				<xs:sequence>
+					<xs:element name="SYSTEM_SP" type="tns:systemCis">
+						<xs:annotation>
+							<xs:documentation>Systém SP užívateľa, ktorý vyvolal dotaz</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="UZIV" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Užívateľ, ktorý vyvolal dotaz</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="STAV" type="tns:ResponseStatus">
+						<xs:annotation>
+							<xs:documentation>Stav odpovede</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="NAVRATOVY_KOD" type="xs:int">
+						<xs:annotation>
+							<xs:documentation>								1 OK
+								1001 Chybné vstupné parametre
+								1020 Nenájdená
+								žiadna FO
+								9999 Chyba pri spracovani requestu:
+								20001 Timeout
+								odpovede externého WS
+								20002 Chyba pri zaslani XML requestu na
+								ext.WS:
+								20003 Chyba pri dohladani FO
+								20011 Nedostupná služba
+								externého WS
+								20100 Ignorovaný záznam:
+								20666 Neatorizovaný prístup
+								...</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="NAVRATOVA_SPRAVA" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Návratová správa</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="NEVYBAVENIE_AVIZA_LIST">
+						<xs:annotation>
+							<xs:documentation>Záznam o vybavení avíz</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element maxOccurs="unbounded" minOccurs="0" name="AVIZO" type="tns:nevybaveneAviza"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+				<xs:attribute name="DOTAZ_ID" type="xs:long" use="required">
+					<xs:annotation>
+						<xs:documentation>Identifikáto dotazu</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:complexType>
+			<xs:complexType name="nevybaveneAviza">
+				<xs:sequence>
+					<xs:element name="ID" type="xs:long">
+						<xs:annotation>
+							<xs:documentation>Identifikátor avíza  z odpovede zaznamenania avíza AVIZO_ID</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="IFO" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>IFO avizovanej osoby</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="POPIS">
+						<xs:annotation>
+							<xs:documentation>Popis avíza</xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:maxLength value="2000"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element minOccurs="0" name="DT_ZMENY" type="xs:date">
+						<xs:annotation>
+							<xs:documentation>Dátum poslednej zmeny avíza</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="POLOZKY_LIST">
+						<xs:annotation>
+							<xs:documentation>Avízované položky</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element maxOccurs="unbounded" minOccurs="0" name="POLOZKA" type="tns:vybavenieAtributy"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="wsa1ZaznamenanieAviza">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="AVIZO" type="tns:avizo"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="avizo">
+				<xs:sequence>
+					<xs:element name="POPIS">
+						<xs:annotation>
+							<xs:documentation>Popis avíza - nezrovnalosti údajov.</xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:maxLength value="2000"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="OSOBA" type="tns:avizoOsoba"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="avizoOsoba">
+				<xs:annotation>
+					<xs:documentation>Avizované údaje osoby</xs:documentation>
+				</xs:annotation>
+				<xs:sequence>
+					<xs:element name="IFO" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>IFO</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="IFO_TOT" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>IFO totožnej osoby</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="RC" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Rodné číslo</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="DT_NARODENIA" type="xs:date">
+						<xs:annotation>
+							<xs:documentation>Dátum narodenia</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="UC_NARODENIA" type="xs:long">
+						<xs:annotation>
+							<xs:documentation>Uzemny celok narodenia  - identifikátor územného celku z číslníka územných celkov</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="MIESTO_NARODENIA" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>miesto narodenia (ak územný celok narodenia nie je známy, napr. cudzinec)</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="STAT_NARODENIA" type="xs:long">
+						<xs:annotation>
+							<xs:documentation>stat narodenia - identifikátor c číselníka  STATCIS</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="POHLAVIE" type="xs:long">
+						<xs:annotation>
+							<xs:documentation>Pohlavie - kód z číselníka pohlaví  - POHLAVIECIS</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="ROD_STAV" type="xs:long">
+						<xs:annotation>
+							<xs:documentation>rodinny stav - kód z číselníka rodinných stavov - RODINNYSTAVCIS</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="ROD_MATRIKA" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>rodna matrika</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="NARODNOST" type="xs:long">
+						<xs:annotation>
+							<xs:documentation>Národnosť - kód z  číselníka NARODNOSTCIS </xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="DT_UMRTIA" type="xs:date">
+						<xs:annotation>
+							<xs:documentation>datum umrtia</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="UC_UMRTIA" type="xs:long">
+						<xs:annotation>
+							<xs:documentation>uzemny celok umrtia - kód územného celku z číslníka územných celkov</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="MIESTO_UMRTIA" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Miesto úmrtia</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="MATRIKA_UMRTIA" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Matrika úmrtia</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="STAT_UMRTIA" type="xs:long">
+						<xs:annotation>
+							<xs:documentation>Štat umrtia - identifikátor c číselníka  STATCIS</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="BIFO" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Bezvýznamový identifikátor osoby</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="TYP_OSOBY" type="xs:long">
+						<xs:annotation>
+							<xs:documentation>Typ osoby  - identifikátor c číselníka  TYPOSOBYCIS</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="OKRES_NARODENIA" type="xs:long">
+						<xs:annotation>
+							<xs:documentation>Okres narodenia  - kód územného celku z číslníka územných celkov</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="OKRES_UMRTIA" type="xs:long">
+						<xs:annotation>
+							<xs:documentation>Okres úmrtia  - kód územného celku z číslníka územných celkov</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="IDENIF_CUDZINCA" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Identifikátor osoby - cudzinca používaný v udzine</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="STUPEN_ZVEREJ" type="xs:long">
+						<xs:annotation>
+							<xs:documentation>Stupeň zverejnenia údajov príslušnej osoby - identifikátor z číselníka STUPENZVERENEJCIS</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="ROK_NARODENIA" type="xs:int">
+						<xs:annotation>
+							<xs:documentation>Rok narodenia, položka sa používa vtedy, keď nie známy presný dátum narodenia (formát RRRR)</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="MENO_LIST">
+						<xs:annotation>
+							<xs:documentation>Mená FO</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element maxOccurs="unbounded" minOccurs="0" name="MENO" type="tns:avizoMeno"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element minOccurs="0" name="PRIEZ_LIST">
+						<xs:annotation>
+							<xs:documentation>Priezviská FO</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element maxOccurs="unbounded" minOccurs="0" name="PRIEZVISKO" type="tns:avizoPriezvisko"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element minOccurs="0" name="RODNEPRIEZ_LIST">
+						<xs:annotation>
+							<xs:documentation>Rodné priezviská FO</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element maxOccurs="unbounded" minOccurs="0" name="RODNE_PRIEZVISKO" type="tns:avizoRodnePriez"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element minOccurs="0" name="TITUL_LIST">
+						<xs:annotation>
+							<xs:documentation>Tituly FO</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element maxOccurs="unbounded" minOccurs="0" name="TITUL" type="tns:avizoTitul"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element minOccurs="0" name="STATNA_PRISL_LIST">
+						<xs:annotation>
+							<xs:documentation>Štátne príslušnosti FO</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element maxOccurs="unbounded" minOccurs="0" name="STATNA_PRISL" type="tns:avizoStatnaPrislusnot"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element minOccurs="0" name="POBYT_OSOBY_LIST">
+						<xs:annotation>
+							<xs:documentation>Pobyty FO</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element maxOccurs="unbounded" minOccurs="0" name="POBYT_OSOBY" type="tns:avizoPobyt"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element minOccurs="0" name="OBMEDZ_PRAV_SPOS_LIST">
+						<xs:annotation>
+							<xs:documentation>Obmedzenia spôsobilosti na právne úkony</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element maxOccurs="unbounded" minOccurs="0" name="OBMEDZ_PRAV_SPOS" type="tns:avizoObmPravnejSpos"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element minOccurs="0" name="RODINNY_VZTAH_LIST">
+						<xs:annotation>
+							<xs:documentation>Rodinné vzťahy FO</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element maxOccurs="unbounded" minOccurs="0" name="RODINNY_VZTAH" type="tns:avizoRodinnyVztah"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element minOccurs="0" name="UDEL_STRATA_OBC_LIST">
+						<xs:annotation>
+							<xs:documentation>Štátne občianstva FO</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element maxOccurs="unbounded" minOccurs="0" name="UDEL_STRATA_OBC" type="tns:avizoUdelStObcianstvo"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element minOccurs="0" name="ZRUS_VYHL_MRTVY_LIST">
+						<xs:annotation>
+							<xs:documentation>Vyhlásenie za mrtveho/Zrušenie vyhlásenia za mŕtveho</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element maxOccurs="unbounded" minOccurs="0" name="ZRUS_VYHL_MRTVY" type="tns:avizoZrusVyhlMrtvy"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="avizoMeno">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="MENO" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Meno</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="MENO_IDX" type="xs:int">
+						<xs:annotation>
+							<xs:documentation>Inex - poradové číslo mena</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+				<xs:attribute name="ID" type="xs:long" use="required">
+					<xs:annotation>
+						<xs:documentation>Jednoznačný identifikátor mena z CRFO SP</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:complexType>
+			<xs:complexType name="avizoPriezvisko">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="PRIEZVISKO" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Priezvisko</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="PRIEZVISKO_IDX" type="xs:int">
+						<xs:annotation>
+							<xs:documentation>Inex - poradové číslo priezviska</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+				<xs:attribute name="ID" type="xs:long" use="required">
+					<xs:annotation>
+						<xs:documentation>Jednoznačný identifikátor priezviska z CRFO SP</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:complexType>
+			<xs:complexType name="avizoRodnePriez">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="PRIEZVISKO" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Rodné priezvisko</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="PRIEZVISKO_IDX" type="xs:int">
+						<xs:annotation>
+							<xs:documentation>Inex - poradové číslo rodného priezviska</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+				<xs:attribute name="ID" type="xs:long" use="required">
+					<xs:annotation>
+						<xs:documentation>Jednoznačný identifikátor rodného priezviska z CRFO SP</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:complexType>
+			<xs:complexType name="avizoTitul">
+				<xs:sequence>
+					<xs:element name="TITUL" type="xs:long">
+						<xs:annotation>
+							<xs:documentation>Identifikátor z číselníka titulov - TITULCIS</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="TYPTIT" type="xs:long">
+						<xs:annotation>
+							<xs:documentation>Identifikátor z číselníka tipov titulov - TYPTITULCIS</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+				<xs:attribute name="ID" type="xs:long" use="required">
+					<xs:annotation>
+						<xs:documentation>Jednoznačný identifikátor titulu z CRFO SP</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:complexType>
+			<xs:complexType name="avizoStatnaPrislusnot">
+				<xs:sequence>
+					<xs:element name="STPRIS" type="xs:long">
+						<xs:annotation>
+							<xs:documentation>Hodnota - identifikátor z číselníka štátov -  STATCIS</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+				<xs:attribute name="ID" type="xs:long" use="required">
+					<xs:annotation>
+						<xs:documentation>Jednoznačný identifikátor štátnej príslušnosti z CRFO SP</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:complexType>
+			<xs:complexType name="avizoPobyt">
+				<xs:sequence>
+					<xs:element name="TYPPOB" type="xs:long">
+						<xs:annotation>
+							<xs:documentation>Hodnota - identifikátor typu pobytu z číselníka  TYPPOBYTUCIS</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="DTPRIHL" type="xs:date">
+						<xs:annotation>
+							<xs:documentation>Dátum prihlásenia na pobyt</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="DTUKON" type="xs:date">
+						<xs:annotation>
+							<xs:documentation>Datum skutocneho ukoncenia pobytu</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="SUPCIS" type="xs:long">
+						<xs:annotation>
+							<xs:documentation>Supisne cislo pobytu</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="ORIENTC" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>orientacne cislo</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="ZNAKOC" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Znak orientacneho cisla pobytu</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="POBSTAT" type="xs:long">
+						<xs:annotation>
+							<xs:documentation>Hodnota - identifikátor z číselníka štátov -  STATCIS</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="ZMIESTO" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>miesto pobytu mimo SR</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="ZOKRES" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>okres pobytu mimo SR</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="ZOBEC" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>obec pobytu mimo SRu</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="ZCASTOB" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>cast obce pobytu mimo SR</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="ZULICA" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>ulica pobytu mimo SR</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="ZORIENTCIS" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>orientacne cislo pobytu mimo SR</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="ZSUPISC" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>supisne cislo mimo SR</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="ZCASTBUD" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>cast budovy mimo SR</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="POBCIS" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Pocitacove cislo pobytu</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="BYTCIS" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>cislo bytu</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="REGADRID" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Identifikátor adresy v registry adries.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="REGVCHODID" type="xs:long">
+						<xs:annotation>
+							<xs:documentation>ID vchodu domu - položka obsahuje hodnotu ID z číselníka RegVchodDomuCis</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="REGDOMID" type="xs:long">
+						<xs:annotation>
+							<xs:documentation>ID domu - položka obsahuje hodnotu  ID z číselníka RegDomCis</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="REGULICAID" type="xs:long">
+						<xs:annotation>
+							<xs:documentation>Ulica - položka obsahuje hodnotu ID z číselníka RegUlicaCis</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="REGCASTOBID" type="xs:long">
+						<xs:annotation>
+							<xs:documentation>Časť obce - položka obsahuje hodnotu ID z číselníka UzemnyCelokCis</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="REGOBECID" type="xs:long">
+						<xs:annotation>
+							<xs:documentation>OBEC - položka obsahuje hodnotu ID z číselníka UzemnyCelokCis</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="REGOKRESID" type="xs:long">
+						<xs:annotation>
+							<xs:documentation>OKRES - položka obsahuje hodnotu ID z číselníka UzemnyCelokCis</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+				<xs:attribute name="ID" type="xs:long" use="required">
+					<xs:annotation>
+						<xs:documentation>Jednoznačný identifikátor pobytu z CRFO SP</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:complexType>
+			<xs:complexType name="avizoObmPravnejSpos">
+				<xs:sequence>
+					<xs:element name="TYPOBM" type="xs:long">
+						<xs:annotation>
+							<xs:documentation>Typ obmedzenia - hodnota - identifikátor z čísleníka TypObmSposCis</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="DTOD" type="xs:date">
+						<xs:annotation>
+							<xs:documentation>Dátum vzniku obmedzenia</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="DTDO" type="xs:date">
+						<xs:annotation>
+							<xs:documentation>Dátum zaniku obmedzenia</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="POZN" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Voľným textom vložená poznámka ku obmedzeniu/pozbaveniu právnej spôsobilosti</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+				<xs:attribute name="ID" type="xs:long" use="required">
+					<xs:annotation>
+						<xs:documentation>Jednoznačný identifikátor obmedzenia z CRFO SP</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:complexType>
+			<xs:complexType name="avizoRodinnyVztah">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="IFO" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Identifikátor IFO vzťahovej osoby</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="TYPVZT" type="xs:long">
+						<xs:annotation>
+							<xs:documentation>Typ rodinného vzťahu - hodnota - identifikátor z čísleníka TYPVZTAHCIS</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="DTVZNIK" type="xs:date">
+						<xs:annotation>
+							<xs:documentation>Dátum vzniku rodinného vzťahu</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="DTZANIK" type="xs:date">
+						<xs:annotation>
+							<xs:documentation>Dátum zaniku rodinného vzťahu</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="FG_NEPL" type="xs:boolean">
+						<xs:annotation>
+							<xs:documentation>priznak neplatnosti</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="DVDNEPL" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Dovod ukoncenia vztahu manzelstvo zadany volnym		 textom</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="MIESTOVYDTXT" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Miesto vydania sobášneho listu - obec. Využíva sa iba pri vzťahu manželstvo. Ak nie je príslušná obec uvedená v  číselníku obcí (väzba), tak sa zapíše hodnota ako text</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="MIESTOVYD" type="xs:long">
+						<xs:annotation>
+							<xs:documentation>Miesto vydania sobášneho listu - hodnota - identifikátor územného celku z číslníka územných celkov</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="PTYPROLE" type="xs:long">
+						<xs:annotation>
+							<xs:documentation>Rola primárnej osoby v rodinnom vzťahu - hodnota - identifikátor z číselníka  TYPROLEVZTCIS</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="VTYPROLE" type="xs:long">
+						<xs:annotation>
+							<xs:documentation>Rola vzťahovej osoby v rodinnom vzťahu  - hodnota - identifikátor z číselníka  TYPROLEVZTCIS</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="SOBMATRTXT" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Sobášna matrika názov</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="SOBMATR" type="xs:long">
+						<xs:annotation>
+							<xs:documentation>Sobášna matrika</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="OPRODIC" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>tykajuci sa vztahu 			rodica a dietata, ak tento rozhodol o obmedzeni alebo pozbaveni 		rodicovskych prav</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+				<xs:attribute name="ID" type="xs:long" use="required">
+					<xs:annotation>
+						<xs:documentation>Jednoznačný identifikátor rodinného vzťhu z CRFO SP</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:complexType>
+			<xs:complexType name="avizoUdelStObcianstvo">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="DT_PREVZATIA" type="xs:date">
+						<xs:annotation>
+							<xs:documentation>Dátum prevzatia Listiny o udelení štátneho občianstva SR alebo Dátum prevzatia Listiny o uvoľnení zo štátneho zväzku SR.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="UDELENIE_STRATA" type="xs:boolean">
+						<xs:annotation>
+							<xs:documentation>Ak je Udelenie true, tak ide o udelenie štátneho občianstva, inak ide o stratu štátneho občianstva.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+				<xs:attribute name="ID" type="xs:long" use="required">
+					<xs:annotation>
+						<xs:documentation>Jednoznačný identifikátor štátneho občianstva  z CRFO SP</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:complexType>
+			<xs:complexType name="avizoZrusVyhlMrtvy">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="DTPRAV" type="xs:date">
+						<xs:annotation>
+							<xs:documentation>Dátum právoplatnosti rozhodnutia.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="MRTVY" type="xs:boolean">
+						<xs:annotation>
+							<xs:documentation>Ak je Vyhlásenie true, tak ide o vyhlásenie za mŕtveho, inak ide o zrušenie vyhlásenia za mŕtveho.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+				<xs:attribute name="ID" type="xs:long" use="required">
+					<xs:annotation>
+						<xs:documentation>Jednoznačný identifikátor  zrušenia vyhlásenia za pŕtveho  z CRFO SP</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:complexType>
+			<xs:complexType name="wsa1ZaznamenanieAvizaResponse">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="AVIZO_ODPOVED" type="tns:WSA1_ODPOVED"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="WSA1_ODPOVED">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="AvizoResponse" type="tns:WSA1_DATA"/>
+				</xs:sequence>
+				<xs:attribute name="RequestDateTime" type="xs:dateTime" use="required"/>
+				<xs:attribute name="ResponseDateTime" type="xs:dateTime" use="required"/>
+			</xs:complexType>
+			<xs:complexType name="WSA1_DATA">
+				<xs:sequence>
+					<xs:element name="SYSTEM_SP" type="tns:systemCis">
+						<xs:annotation>
+							<xs:documentation>Systém SP užívateľa, ktorý vyvolal dotaz</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="UZIV" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Užívateľ, ktorý vyvolal dotaz</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="STAV" type="tns:ResponseStatus">
+						<xs:annotation>
+							<xs:documentation>Stav odpovede</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="NAVRATOVY_KOD" type="xs:int">
+						<xs:annotation>
+							<xs:documentation>								1 OK
+								1001 Chybné vstupné parametre
+								1020 Nenájdená
+								žiadna FO
+								9999 Chyba pri spracovani requestu:
+								20001 Timeout
+								odpovede externého WS
+								20002 Chyba pri zaslani XML requestu na
+								ext.WS:
+								20003 Chyba pri dohladani FO
+								20011 Nedostupná služba
+								externého WS
+								20100 Ignorovaný záznam:
+								20666 Neatorizovaný prístup
+								...</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="NAVRATOVA_SPRAVA" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Návratová správa</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="AVIZO_ID" type="xs:int">
+						<xs:annotation>
+							<xs:documentation>Identifikátor zaznamenaného avíza.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+				<xs:attribute name="DOTAZ_ID" type="xs:long" use="required">
+					<xs:annotation>
+						<xs:documentation>Identifikáto dotazu</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:complexType>
+			<xs:simpleType name="ResponseStatus">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="OPEN"/>
+					<xs:enumeration value="SENDEXT"/>
+					<xs:enumeration value="RESPONDED"/>
+					<xs:enumeration value="EXTIDLE"/>
+					<xs:enumeration value="CLOSED"/>
+					<xs:enumeration value="ERROR"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="wsa2VybavenieAvizResponse">
+		<wsdl:part name="parameters" element="tns:wsa2VybavenieAvizResponse">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="wsa3NevybaveneAviza">
+		<wsdl:part name="parameters" element="tns:wsa3NevybaveneAviza">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="wsa2VybavenieAviz">
+		<wsdl:part name="parameters" element="tns:wsa2VybavenieAviz">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="wsa1ZaznamenanieAviza">
+		<wsdl:part name="parameters" element="tns:wsa1ZaznamenanieAviza">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="wsa3NevybaveneAvizaResponse">
+		<wsdl:part name="parameters" element="tns:wsa3NevybaveneAvizaResponse">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="wsa1ZaznamenanieAvizaResponse">
+		<wsdl:part name="parameters" element="tns:wsa1ZaznamenanieAvizaResponse">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:portType name="CrfoWSAEndpoint">
+		<wsdl:operation name="wsa2VybavenieAviz">
+			<wsdl:input name="wsa2VybavenieAviz" message="tns:wsa2VybavenieAviz">
+    </wsdl:input>
+			<wsdl:output name="wsa2VybavenieAvizResponse" message="tns:wsa2VybavenieAvizResponse">
+    </wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="wsa3NevybaveneAviza">
+			<wsdl:input name="wsa3NevybaveneAviza" message="tns:wsa3NevybaveneAviza">
+    </wsdl:input>
+			<wsdl:output name="wsa3NevybaveneAvizaResponse" message="tns:wsa3NevybaveneAvizaResponse">
+    </wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="wsa1ZaznamenanieAviza">
+			<wsdl:input name="wsa1ZaznamenanieAviza" message="tns:wsa1ZaznamenanieAviza">
+    </wsdl:input>
+			<wsdl:output name="wsa1ZaznamenanieAvizaResponse" message="tns:wsa1ZaznamenanieAvizaResponse">
+    </wsdl:output>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="CrfoWSAEndpointServiceSoapBinding" type="tns:CrfoWSAEndpoint">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="wsa2VybavenieAviz">
+			<soap:operation soapAction="tns:wsa2VybavenieAviz" style="document"/>
+			<wsdl:input name="wsa2VybavenieAviz">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="wsa2VybavenieAvizResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="wsa3NevybaveneAviza">
+			<soap:operation soapAction="tns:wsa3NevybaveneAviza" style="document"/>
+			<wsdl:input name="wsa3NevybaveneAviza">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="wsa3NevybaveneAvizaResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="wsa1ZaznamenanieAviza">
+			<soap:operation soapAction="tns:wsa1ZaznamenanieAviza" style="document"/>
+			<wsdl:input name="wsa1ZaznamenanieAviza">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="wsa1ZaznamenanieAvizaResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="CrfoWSAEndpointService">
+		<wsdl:port name="CrfoWSAEndpointPort" binding="tns:CrfoWSAEndpointServiceSoapBinding">
+			<soap:address location="http://localhost:8080/smart-cravizo/services/crfoWSA"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

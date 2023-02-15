@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.1.1.final using JasperReports Library version 6.1.1  -->
+<!-- 2015-11-26T17:56:31 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="osoba_rodvzt" language="groovy" pageWidth="555" pageHeight="842" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="7a59b251-041e-499a-9abf-17e9763057de">
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="ifo" class="java.lang.String"/>
+	<field name="typvzt.nazov" class="java.lang.String"/>
+	<field name="ptyprole.nazov" class="java.lang.String"/>
+	<field name="vtyprole.nazov" class="java.lang.String"/>
+	<field name="dtvznik" class="java.util.Date"/>
+	<field name="dtzanik" class="java.util.Date"/>
+	<field name="typvzt" class="java.lang.Object"/>
+	<field name="ptyprole" class="java.lang.Object"/>
+	<field name="vtyprole" class="java.lang.Object"/>
+	<field name="fg_nepl" class="java.lang.Boolean"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="34" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="99" height="34" uuid="0577e489-a9d8-4655-a776-68182e892364"/>
+				<box leftPadding="2">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<text><![CDATA[IFO osoby vzťahu]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="99" y="0" width="90" height="34" uuid="07ffa382-3a55-4cc0-8b94-9e5f600545f3">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box leftPadding="2">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<text><![CDATA[Typ rodinného vzťahu]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="189" y="0" width="86" height="34" uuid="e312a6de-fa88-4a6c-b46c-1be754fe06bb"/>
+				<box leftPadding="2">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<text><![CDATA[Rola primárnej osoby]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="275" y="0" width="86" height="34" uuid="964d6829-8fcb-493b-8386-1c66ea61837f">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box leftPadding="2">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<text><![CDATA[Rola vzťahovej osoby]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="361" y="0" width="74" height="34" uuid="8846e6eb-8167-4e2b-a50c-89e4b4e10f5c"/>
+				<box leftPadding="2">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<text><![CDATA[Dátum vzniku]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="435" y="0" width="74" height="34" uuid="1edb288e-9fc3-4db9-855e-e90f4580ec5e">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box leftPadding="2">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<text><![CDATA[Dátum zániku]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="509" y="0" width="44" height="34" uuid="f6a7724e-f171-42d2-8ef7-46d1d3aeb865">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box leftPadding="2">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<text><![CDATA[Platný vzťah]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="99" height="16" uuid="134bc861-7b11-48ed-806c-b298a2349152"/>
+				<box leftPadding="2">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ifo}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement x="99" y="0" width="90" height="16" uuid="e1d09348-3900-4aca-b62f-76e58935318d">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box leftPadding="2">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{typvzt.nazov}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement x="189" y="0" width="86" height="16" uuid="baa0d4c5-534b-46d5-b321-2ef0d0428b6e">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box leftPadding="2">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ptyprole.nazov}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement x="275" y="0" width="86" height="16" uuid="a38419f7-7ae3-4556-8a55-3fdc6445bba8">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box leftPadding="2">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vtyprole.nazov}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement x="361" y="0" width="74" height="16" uuid="51626080-6cd5-4bab-ad2e-0c7669d8af5d"/>
+				<box leftPadding="2">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd.MM.yyyy").format($F{dtvznik})]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement x="435" y="0" width="74" height="16" uuid="8f848479-6a67-4acf-9637-2c7bf8bfb959"/>
+				<box leftPadding="2">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd.MM.yyyy").format($F{dtzanik})]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement x="509" y="0" width="44" height="16" uuid="48148694-72db-4620-9b9f-ca78dbdd62b9"/>
+				<box leftPadding="2">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fg_nepl}.toString().replace("true","nie").replace("false","áno")]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

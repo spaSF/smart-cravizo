@@ -1,0 +1,1066 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.1.1.final using JasperReports Library version 6.1.1  -->
+<!-- 2015-11-30T11:53:45 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="detail_FO_CRFO" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4609b597-87e0-42d5-b9fb-5f86a41d01a0">
+	<property name="ireport.zoom" value="1.771561000000011"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="844"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<style name="Title" mode="Transparent" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<parameter name="REPORTS_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["D:\\ProfleFolders\\JaspersoftWorkspace\\MyReports"]]></defaultValueExpression>
+	</parameter>
+	<field name="osoba.ifo" class="java.lang.String"/>
+	<field name="osoba.ifo_tot" class="java.lang.String"/>
+	<field name="osoba.dtnar" class="java.util.Date"/>
+	<field name="osoba.pohl" class="java.lang.String"/>
+	<field name="osoba.menoCele" class="java.lang.String"/>
+	<field name="osoba.priezCele" class="java.lang.String"/>
+	<field name="osoba.rodPrCele" class="java.lang.String"/>
+	<field name="osoba.titulPred" class="java.lang.String"/>
+	<field name="osoba.titulZa" class="java.lang.String"/>
+	<field name="osoba.priezvisko" class="java.util.Collection"/>
+	<field name="uzivatel" class="java.lang.Object"/>
+	<field name="osoba.meno" class="java.util.Collection"/>
+	<field name="osoba.rodnepriezvisko" class="java.util.Collection"/>
+	<field name="osoba.rc" class="java.lang.String"/>
+	<field name="osoba.statnaPrislusnost" class="java.util.Collection"/>
+	<field name="osoba.zaujmOsobaSys" class="java.util.Collection"/>
+	<field name="osoba" class="java.lang.Object"/>
+	<field name="osoba.doklad" class="java.util.Collection"/>
+	<field name="osoba.udelStObcianstvo" class="java.util.Collection"/>
+	<field name="osoba.obmPravnejSpos" class="java.util.Collection"/>
+	<field name="osoba.zakazPobytu" class="java.util.Collection"/>
+	<field name="osoba.zrusVyhlMrtvy" class="java.util.Collection"/>
+	<field name="osoba.pobyt" class="java.util.Collection"/>
+	<field name="osoba.rodinnyVztah" class="java.util.Collection"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="51" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="30" width="554" height="21" forecolor="#2A3582" uuid="6a95fa7d-a39c-459c-8c22-a0965fcf33fa"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true" pdfEncoding="Cp1250"/>
+				</textElement>
+				<text><![CDATA[Detail fyzickej osoby v registri CRFO]]></text>
+			</staticText>
+			<image evaluationTime="Report">
+				<reportElement x="0" y="-6" width="230" height="36" uuid="bbf799a3-ca0c-440e-b95a-91531ab8c788"/>
+				<imageExpression><![CDATA[$P{REPORTS_DIR} + "/logo_socpoist.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="6" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="184" splitType="Stretch">
+			<textField>
+				<reportElement x="104" y="27" width="240" height="16" uuid="03b9a4c5-59da-4df7-9435-835eda1e83aa"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{osoba.ifo}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="104" y="59" width="240" height="16" uuid="712c4332-946e-40dd-aa9e-a68fea55c1f9"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd.MM.yyyy").format($F{osoba.dtnar})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="104" y="75" width="240" height="16" uuid="712c4332-946e-40dd-aa9e-a68fea55c1f8"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{osoba.menoCele}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="104" y="91" width="240" height="16" uuid="712c4332-946e-40dd-aa9e-a68fea55c1f9"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{osoba.priezCele}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="104" y="107" width="240" height="16" uuid="712c4332-946e-40dd-aa9e-a68fea55c1f0"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{osoba.rodPrCele}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="104" y="123" width="240" height="16" uuid="712c4332-946e-40dd-aa9e-a68fea55c1f5"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{osoba.titulPred}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="104" y="139" width="240" height="16" uuid="712c4332-946e-40dd-aa9e-a68fea55c1f6"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{osoba.titulZa}.toString()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="2" y="27" width="88" height="16" uuid="638b633d-5d1c-48e6-97d6-8a6cf5f4d7b5"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<text><![CDATA[IFO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="59" width="88" height="16" uuid="638b633d-5d1c-48e6-97d6-8a6cf5f4d7b6"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<text><![CDATA[Dátum narodenia:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="75" width="88" height="16" uuid="638b633d-5d1c-48e6-97d6-8a6cf5f4d7b7"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<text><![CDATA[Meno:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="91" width="88" height="16" uuid="638b633d-5d1c-48e6-97d6-8a6cf5f4d7b8"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<text><![CDATA[Priezvisko:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="107" width="88" height="16" uuid="638b633d-5d1c-48e6-97d6-8a6cf5f4d7b9"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<text><![CDATA[Rodné priezvisko:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="123" width="88" height="16" uuid="638b633d-5d1c-48e6-97d6-8a6cf5f4d7b0"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<text><![CDATA[Titul pred:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="139" width="88" height="16" uuid="638b633d-5d1c-48e6-97d6-8a6cf5f4d7ba"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<text><![CDATA[Titul za:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="43" width="88" height="16" uuid="4e489892-f55c-4c59-a3b4-7587978d07a5"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<text><![CDATA[Rodné číslo:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="104" y="43" width="240" height="16" uuid="d06fd3f9-49c6-4191-8103-03e74c283ba1"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{osoba.rc}.toString()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="2" y="4" width="370" height="23" forecolor="#2A3582" uuid="c00606c0-7a63-4c98-8458-a7aa1956957e"/>
+				<textElement>
+					<font size="12" isBold="true" pdfEncoding="Cp1250"/>
+				</textElement>
+				<text><![CDATA[Identifikačné údaje]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="453" y="27" width="102" height="16" uuid="106ecb5c-19df-4807-bbc4-41cecd3d4807"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{osoba}.pohl.nazov]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="348" y="28" width="102" height="16" uuid="8b760f8a-4e6c-42cf-aaee-d8f9c5c06d06"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<text><![CDATA[Pohlavie]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="348" y="44" width="102" height="16" uuid="d6f25aa4-4e14-4939-bc92-4e9c58bd2fb9"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<text><![CDATA[Rodinný stav]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="453" y="43" width="102" height="16" uuid="95a05017-14fc-4ee3-a609-f4b889510319"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{osoba}.rodst.nazov]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="348" y="60" width="102" height="16" uuid="4bce7824-d0f0-4e9b-8d1d-0db932353220"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<text><![CDATA[Národnosť]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="453" y="59" width="102" height="16" uuid="4a4e5d72-5915-47c7-bb03-ead1bd11db57"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{osoba}.narodnost.nazov]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="348" y="76" width="102" height="16" uuid="adba5a67-60ec-4947-ba18-613daedb7c46"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<text><![CDATA[BIFO]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="453" y="75" width="102" height="16" uuid="cdb6f5ff-dbc6-4d89-8548-17a2de74f4a4"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{osoba}.bifo]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="348" y="92" width="102" height="16" uuid="a28355fe-611c-4ce8-aef0-1d02f2680c7b"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<text><![CDATA[Identifikátor cudzinca]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="453" y="92" width="102" height="16" uuid="8a43db2a-71b9-421c-8432-117ce6130868"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{osoba}.ic]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="348" y="108" width="102" height="16" uuid="f75bfe8d-3f36-4ff8-9644-43b6bd7a58fb"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<text><![CDATA[Stupeň zverejnenia]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="453" y="108" width="26" height="16" uuid="d851ead8-9537-4abe-9c35-68e59b6140ae"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{osoba}.stzverej.nazov]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="2" y="155" width="88" height="16" uuid="d1f5dc62-a6a3-4691-b350-214cdfd5a8a4"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<text><![CDATA[Typ osoby]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="104" y="155" width="240" height="16" uuid="e43f79ff-468f-441a-8b89-94359942dfcb"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{osoba}.typoso.nazov]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement mode="Transparent" x="0" y="178" width="555" height="1" uuid="b43f80c5-8eec-4688-baac-fb328feb7939">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+			</line>
+		</band>
+		<band height="64">
+			<staticText>
+				<reportElement x="2" y="0" width="370" height="17" forecolor="#2A3582" uuid="a7b89b36-023d-47bf-b8c6-a5a66a3c6b74"/>
+				<textElement>
+					<font size="12" isBold="true" pdfEncoding="Cp1250"/>
+				</textElement>
+				<text><![CDATA[Rozšírené identifikačné údaje]]></text>
+			</staticText>
+			<subreport>
+				<reportElement x="1" y="20" width="180" height="32" uuid="8b326765-5ae5-4f41-b5a5-18d2c8bd9125">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{osoba.meno},false)]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{REPORTS_DIR}+"/osoba_meno.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="188" y="20" width="180" height="32" uuid="fe4c608e-4a0f-4763-922f-09c732481e96">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{osoba.priezvisko},false)]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{REPORTS_DIR}+"/osoba_priezv.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="375" y="20" width="180" height="32" uuid="6445a927-0f47-4605-9efa-31e5683e4b8f">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{osoba.rodnepriezvisko},false)]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{REPORTS_DIR}+"/osoba_rodpr.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="93">
+			<staticText>
+				<reportElement x="2" y="12" width="370" height="17" forecolor="#2A3582" uuid="9d41d260-2689-4169-8bbf-2193dbc83503"/>
+				<textElement>
+					<font size="12" isBold="true" pdfEncoding="Cp1250"/>
+				</textElement>
+				<text><![CDATA[Údaje o štátnej príslušnosti a občianstve]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="35" width="213" height="27" uuid="78326ed5-ccb9-4ee1-85fc-d16780b16d93"/>
+				<box leftPadding="2">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font isBold="true" pdfEncoding="Cp1250"/>
+				</textElement>
+				<text><![CDATA[Dátum prevzatia/udelenia občianstva SR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="214" y="35" width="60" height="27" uuid="0b01de4c-ddae-48f5-9d1a-61d1e13b0e24">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box leftPadding="2">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font isBold="true" pdfEncoding="Cp1250"/>
+				</textElement>
+				<text><![CDATA[udelenie /strata]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement x="214" y="62" width="60" height="16" uuid="61153c87-2386-4e80-a547-fc7ab43c0b34"/>
+				<box leftPadding="2">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{osoba.udelStObcianstvo}.fg_udst.toString().replace(", ","\n").replace("[","").replace("]","").replace("false","strata").replace("true","udelenie")]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement x="1" y="62" width="213" height="16" uuid="2a271f3e-e651-4f68-8b9b-e5577cb961e0"/>
+				<box leftPadding="2">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{osoba.udelStObcianstvo}.dtprev.toString().replace(", ","\n").replace("[","").replace("]","")]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="282" y="35" width="273" height="26" uuid="4d4b9064-dd8f-4aa7-bace-27712785c671"/>
+				<box leftPadding="2">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font isBold="true" pdfEncoding="Cp1250"/>
+				</textElement>
+				<text><![CDATA[Štátna príslušnosť]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="282" y="62" width="273" height="16" uuid="5d2d58e3-a6d3-4e97-af56-3626c71f69b5"/>
+				<box leftPadding="2">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{osoba.statnaPrislusnost}.stpris.nazov.toString().replace(", ","\n").replace("[","").replace("]","")]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement mode="Transparent" x="-1" y="4" width="555" height="1" uuid="609c7194-be4f-4565-a7e9-e25758e937d5">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+			</line>
+		</band>
+		<band height="256" splitType="Stretch">
+			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
+			<textField isBlankWhenNull="true">
+				<reportElement x="403" y="56" width="152" height="16" uuid="24070618-0403-4668-ad39-287a46a4c25f"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{osoba}.rodmatr]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="122" y="146" width="152" height="16" uuid="75641862-7bc6-4e7c-91ba-6466733ed1a9"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{osoba}.ucumr.nazov]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="403" y="146" width="152" height="16" uuid="370b5513-956f-4bc0-b9d2-a3bc76bf8c24"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{osoba}.umrmatr]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="282" y="56" width="121" height="16" uuid="33a40cba-6e23-4b50-be26-b0b641baa8c7"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<text><![CDATA[Rodná matrika]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="146" width="122" height="16" uuid="ad603445-da7b-4692-9103-65252bd9b90f"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<text><![CDATA[Územný celok úmrtia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="282" y="146" width="121" height="16" uuid="f9b4a100-0927-408d-850f-ffdc6b04fcdc"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<text><![CDATA[Matrika úmrtia]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="122" y="162" width="152" height="16" uuid="f8281d71-7b7d-40d0-a987-68e848678939"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{osoba}.okrumr.nazov]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="162" width="122" height="16" uuid="52c47625-6889-4b8c-9bba-81c9132d5a85"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<text><![CDATA[Okres úmrtia]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="403" y="216" width="152" height="16" uuid="61e9ef63-9e65-4a0b-a2e3-b38562c40efc"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{osoba}.dovnepl]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="282" y="216" width="121" height="16" uuid="7886bf5b-7c1b-4161-8f81-e4bb11e75345"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<text><![CDATA[Dôvod neplatnosti]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="122" y="56" width="152" height="16" uuid="9c68f2ec-bde9-4b35-8cc6-e9d2acc0f016"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{osoba}.ucnar.nazov]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="56" width="122" height="16" uuid="fe62f2fa-6915-4ee6-afa8-cd2a13dbf0b2"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<text><![CDATA[Územný celok narodenia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="20" width="555" height="17" forecolor="#2A3582" uuid="5920af92-e6bd-4362-b04f-2f646d3516be"/>
+				<textElement>
+					<font size="12" isBold="true" pdfEncoding="Cp1250"/>
+				</textElement>
+				<text><![CDATA[Údaje o narodení]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="122" y="40" width="152" height="16" uuid="f8b75cd9-2606-4ca0-8f9f-f4bb886105d8"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{osoba}.mnar]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="403" y="40" width="152" height="16" uuid="705f6cd4-724a-4109-88ad-af47e7648927"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{osoba}.stnar.nazov]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="40" width="122" height="16" uuid="cb9288bb-e9c5-4064-9f0f-08eb4b700873"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<text><![CDATA[Miesto narodenia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="282" y="40" width="121" height="16" uuid="31bffd00-f3b2-4e78-a6cb-8d737813a950"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<text><![CDATA[Štát narodenia]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="122" y="72" width="152" height="16" uuid="efa89d5b-d976-4b62-b12e-45e3d471e833"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{osoba}.okrnar.nazov]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="72" width="122" height="16" uuid="7b9fc862-69a9-4448-b687-bd38d7e60e08"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<text><![CDATA[Okres narodenia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="88" width="122" height="16" uuid="623b88c9-447b-4d64-88c6-b3a23c7cd5fa"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<text><![CDATA[Rok narodenia]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="122" y="88" width="152" height="16" uuid="9624d435-3c18-40b6-81a6-9df0b7f40807"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{osoba}.roknar]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="282" y="72" width="121" height="16" uuid="c9b37948-116d-4f12-970a-20c1d9a851bd"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<text><![CDATA[Rodná matrika ID]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="403" y="72" width="152" height="16" uuid="52a7dba3-c186-4e5f-bbdf-fb80b44d108a"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{osoba}.rodmatr_id]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="110" width="555" height="17" forecolor="#2A3582" uuid="822e6143-dfc9-4bea-ab17-bfa7c2e68175"/>
+				<textElement>
+					<font size="12" isBold="true" pdfEncoding="Cp1250"/>
+				</textElement>
+				<text><![CDATA[Údaje o úmrtí]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="122" y="130" width="152" height="16" uuid="fc022e79-fedb-4800-af54-798ec94303bf"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{osoba}.mumr]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="130" width="122" height="16" uuid="9d4b0499-380e-437f-96e4-37619b681a42"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<text><![CDATA[Miesto úmrtia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="178" width="122" height="16" uuid="e621fa49-1e11-4d50-b86d-09369ba1aad9"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<text><![CDATA[Dátum úmrtia]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="122" y="178" width="152" height="16" uuid="bb88b16d-6707-4955-becf-dc53e6ce5337"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{osoba}.dtumr!=null ? new SimpleDateFormat("dd.MM.yyyy").format($F{osoba}.dtumr) : null)]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="282" y="130" width="121" height="16" uuid="1a0b63e0-d5f3-416c-8a90-82cc4e8ff553"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<text><![CDATA[Štát úmrtia]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="403" y="130" width="152" height="16" uuid="e36d0626-876d-4375-8a4c-9e8006e5c90a"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{osoba}.stumr.nazov]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="282" y="162" width="121" height="16" uuid="f7f6c74d-27dc-47f5-9ca2-085aa03712d3"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<text><![CDATA[Úmrtná matrika ID]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="403" y="162" width="152" height="16" uuid="54555914-0758-4d8e-aa8d-ac4063ca04f5"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{osoba}.umrmatr_id]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="200" width="274" height="16" forecolor="#2A3582" uuid="41d898a4-9848-49e8-938f-b7f73200ccc3"/>
+				<textElement>
+					<font isBold="true" pdfEncoding="Cp1250"/>
+				</textElement>
+				<text><![CDATA[Zrušenie vyhlásenia osoby za mŕtvu]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="216" width="160" height="16" uuid="041801eb-cfdf-4381-a0ca-dc950b7ba9b0"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<text><![CDATA[Dátum právoplatnosti rozhodnutia]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="160" y="216" width="114" height="16" uuid="eed65efe-dd61-4ad5-b6c1-05c65b80ef32"/>
+				<textFieldExpression><![CDATA[$F{osoba.zrusVyhlMrtvy}.dtprav.toString().replace(", ","\n").replace("[","").replace("]","")]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="282" y="200" width="180" height="16" forecolor="#2A3582" uuid="15b43e4a-b0cf-4d5e-a596-87e24532347c">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true" pdfEncoding="Cp1250"/>
+				</textElement>
+				<text><![CDATA[Ukončenie platnosti]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="282" y="232" width="121" height="16" uuid="bcdc74c1-0a95-4fc5-a0d7-bcca0e1bbeb3"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<text><![CDATA[Dátum ukonč. vzťahu]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="403" y="232" width="152" height="16" uuid="9558402d-d0f0-42d9-b803-00868a793732"/>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{osoba}.dtukon!=null ? new SimpleDateFormat("dd.MM.yyyy").format($F{osoba}.dtukon) : null)]]></textFieldExpression>
+			</textField>
+			<break>
+				<reportElement mode="Opaque" x="0" y="255" width="547" height="1" uuid="d08cb954-2a37-4fdc-83ad-6b6bd6d50cd7"/>
+			</break>
+			<line>
+				<reportElement mode="Transparent" x="0" y="7" width="555" height="1" uuid="ea4209c0-30f0-4526-8f6b-78d05a7839aa">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+			</line>
+		</band>
+		<band height="69" splitType="Stretch">
+			<staticText>
+				<reportElement x="1" y="6" width="535" height="17" forecolor="#2A3582" uuid="367006d7-e2cd-45fe-bded-f32ae3e62ba3"/>
+				<textElement>
+					<font size="12" isBold="true" pdfEncoding="Cp1250"/>
+				</textElement>
+				<text><![CDATA[Adresy]]></text>
+			</staticText>
+			<subreport>
+				<reportElement x="0" y="26" width="555" height="43" uuid="dc92f21e-bcc1-40f8-8df7-6b041d568dc7">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{osoba.pobyt},false)]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{REPORTS_DIR}+"/osoba_adresy.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="50">
+			<staticText>
+				<reportElement x="0" y="2" width="340" height="16" forecolor="#2A3582" uuid="104510f5-053e-4b1d-94b6-c8ac7f5ec768"/>
+				<textElement>
+					<font isBold="true" pdfEncoding="Cp1250"/>
+				</textElement>
+				<text><![CDATA[Zákaz pobytu]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="18" width="80" height="16" uuid="d2b71e7c-204c-4f46-848f-871fd6d9b465"/>
+				<box leftPadding="2">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<text><![CDATA[Dátum začiatku]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="80" y="18" width="88" height="16" uuid="a86c4f42-7a89-4368-86b8-f53bb4e11b23"/>
+				<box leftPadding="2">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<text><![CDATA[Dátum ukončenia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="168" y="18" width="86" height="16" uuid="a774c9b8-11f7-4175-ab0d-26d7fe99f7d5"/>
+				<box leftPadding="2">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<text><![CDATA[Doplňujúce údaje]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="254" y="18" width="86" height="16" uuid="b67327dd-0278-49c7-83ac-5d0342d75013"/>
+				<box leftPadding="2">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<text><![CDATA[Región]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="34" width="80" height="16" uuid="2fb0f650-8833-4ff2-9161-8888ae2c7f91"/>
+				<box leftPadding="2">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{osoba.zakazPobytu}.dtod.toString().replace(", ","\n").replace("[","").replace("]","")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="80" y="34" width="88" height="16" uuid="6e8368dd-3fba-4c2c-8904-e344ab24c0bd"/>
+				<box leftPadding="2">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{osoba.zakazPobytu}.dtdo.toString().replace(", ","\n").replace("[","").replace("]","")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="168" y="34" width="86" height="16" uuid="fecc1cf7-1e92-45cd-8bc6-2ea9c1f80026"/>
+				<box leftPadding="2">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{osoba.zakazPobytu}.pozn.toString().replace(", ","\n").replace("[","").replace("]","")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="254" y="34" width="86" height="16" uuid="b227a950-53c4-4522-98e8-7273ae34dd50"/>
+				<box leftPadding="2">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{osoba.zakazPobytu}.zakazRegion.nazov.toString().replace(", ","\n").replace("[","").replace("]","")]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="90">
+			<staticText>
+				<reportElement x="0" y="15" width="535" height="17" forecolor="#2A3582" uuid="c02a345e-5527-47da-9f3e-5ac51e893d92"/>
+				<textElement>
+					<font size="12" isBold="true" pdfEncoding="Cp1250"/>
+				</textElement>
+				<text><![CDATA[Rodinné vzťahy]]></text>
+			</staticText>
+			<line>
+				<reportElement mode="Transparent" x="0" y="6" width="555" height="1" uuid="3798959c-b3ab-4682-b6ce-20318a4d5388">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+			</line>
+			<subreport>
+				<reportElement x="-1" y="37" width="555" height="43" uuid="e7491c36-8c61-401e-9de2-c5927c953c5f">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{osoba.rodinnyVztah},false)]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{REPORTS_DIR}+"/osoba_rodvzt.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="80">
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement x="0" y="54" width="102" height="16" uuid="bcb2ef67-3f4b-49d4-90eb-2f820fd1e795"/>
+				<box leftPadding="2">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{osoba.doklad}.druhdokl.nazov.toString().replace(", ","\n").replace("[","").replace("]","")]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement x="102" y="54" width="102" height="16" uuid="95cd39cd-80df-4432-8698-359e345e7b22"/>
+				<box leftPadding="2">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{osoba.doklad}.cisdok.toString().replace(", ","\n").replace("[","").replace("]","")]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="38" width="102" height="16" uuid="abd17bac-6f2e-4b37-8162-53bc7b755d81"/>
+				<box leftPadding="2">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<text><![CDATA[Druh dokladu]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="102" y="38" width="102" height="16" uuid="bdc1e396-a2c1-4f9d-8f2d-b5672849c6e7"/>
+				<box leftPadding="2">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<text><![CDATA[Číslo dokladu]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="204" y="38" width="51" height="16" uuid="37da7e9c-cc5a-41bb-af07-7b6bd1da2a6c"/>
+				<box leftPadding="2">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<text><![CDATA[u držiteľa]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement x="204" y="54" width="51" height="16" uuid="c4d37e68-8198-4325-b923-a3c1be2c21cc"/>
+				<box leftPadding="2">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{osoba.doklad}.fg_udrz.toString().replace(", ","\n").replace("[","").replace("]","").replace("false","nie").replace("true","áno")]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="14" width="535" height="17" forecolor="#2A3582" uuid="33e47525-0984-4dc8-9a47-2de6dd3c12b9"/>
+				<textElement>
+					<font size="12" isBold="true" pdfEncoding="Cp1250"/>
+				</textElement>
+				<text><![CDATA[Doklady]]></text>
+			</staticText>
+			<line>
+				<reportElement mode="Transparent" x="0" y="3" width="555" height="1" uuid="96a6fa39-0dd1-438e-8539-7e3d3896746a">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+			</line>
+		</band>
+		<band height="70">
+			<staticText>
+				<reportElement x="0" y="31" width="204" height="16" uuid="76ab3962-bd12-44cd-baad-b50eadbac3cd"/>
+				<box leftPadding="2">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<text><![CDATA[Typ obmedzenia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="204" y="31" width="80" height="16" uuid="27961960-6769-4a0a-b35f-6a308ec5d848"/>
+				<box leftPadding="2">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<text><![CDATA[Dátum začiatku]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="284" y="31" width="86" height="16" uuid="17cb2225-8576-42c2-bb01-8c6c521ed842"/>
+				<box leftPadding="2">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<text><![CDATA[Dátum ukončenia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="370" y="31" width="164" height="16" uuid="891be06f-1927-4952-b8e1-d5837e88b7be"/>
+				<box leftPadding="2">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<text><![CDATA[Poznámka]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="47" width="204" height="16" uuid="6f5f7c3e-a7db-49ab-92e1-568ce5051b55"/>
+				<box leftPadding="2">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{osoba.obmPravnejSpos}.typobm.toString().replace(", ","\n").replace("[","").replace("]","")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="204" y="47" width="80" height="16" uuid="42d1b3ef-6c63-460d-aae3-a716a0b9fc13"/>
+				<box leftPadding="2">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{osoba.obmPravnejSpos}.tdod.toString().replace(", ","\n").replace("[","").replace("]","")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="284" y="47" width="86" height="16" uuid="197e300d-674b-4723-af1e-77bf1d2c3a0a"/>
+				<box leftPadding="2">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{osoba.obmPravnejSpos}.dtdo.toString().replace(", ","\n").replace("[","").replace("]","")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="370" y="47" width="164" height="16" uuid="2d0a7e78-957c-4b1e-b135-6e5aa95b9b05"/>
+				<box leftPadding="2">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{osoba.obmPravnejSpos}.pozn.toString().replace(", ","\n").replace("[","").replace("]","")]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="15" width="534" height="16" forecolor="#2A3582" uuid="0ca8975c-0a50-41a7-b769-c5c631de4038"/>
+				<textElement>
+					<font size="12" isBold="true" pdfEncoding="Cp1250"/>
+				</textElement>
+				<text><![CDATA[Údaje o pozbavení, alebo obmedzení právnej spôsobilosti]]></text>
+			</staticText>
+			<line>
+				<reportElement mode="Transparent" x="0" y="4" width="555" height="1" uuid="13947b76-ad7f-4044-95e8-5c70be6defbc">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+			</line>
+		</band>
+		<band height="72">
+			<subreport>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="1" y="35" width="379" height="30" uuid="4667acf0-ecb3-40ee-a7d9-493565ce2785"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{osoba.zaujmOsobaSys},false)]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{REPORTS_DIR}+"/osoba_syszaujem.jasper"]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement x="0" y="15" width="313" height="17" forecolor="#2A3582" uuid="26642821-8dce-48ad-a701-2c0c024aaf63">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="12" isBold="true" pdfEncoding="Cp1250"/>
+				</textElement>
+				<text><![CDATA[Záujmová osoba pre systém SP]]></text>
+			</staticText>
+			<line>
+				<reportElement mode="Transparent" x="0" y="4" width="555" height="1" uuid="a3abebdd-fe8e-40e3-9d16-e5f34d61ae1b">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="34" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement x="-1" y="-15" width="555" height="15" uuid="60aa3e69-e2e2-42b4-8657-b08c046ca15a"/>
+				<textElement>
+					<font size="9" isStrikeThrough="false" pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Dokument bol  vytvorený v Sociálnej poisťovni dňa " + new SimpleDateFormat("dd.MM.yyyy").format(new Date()) + " o " + new SimpleDateFormat("HH:mm:ss").format(new Date()) + " uživateľom " + $F{uzivatel}.surname +" "+ $F{uzivatel}.name]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="4" width="555" height="16" uuid="b09c69c2-73f3-42f9-8058-b3fef15bc66f"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA["Strana -" + $V{PAGE_NUMBER} + "-"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
